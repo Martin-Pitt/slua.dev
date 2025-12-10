@@ -41,14 +41,8 @@ jobs:
         fi
         echo "LSL definitions file size: $(wc -c < src/data/lsl_definitions.yaml) bytes"
     
-    # - name: Run autogenerate json script
-    #   run: npm run autogenerate-json
-    
-    # - name: Run autogenerate grammar script
-    #   run: npm run autogenerate-grammar
-    
-    # - name: Run autogenerate stubs script
-    #   run: npm run autogenerate-stubs
+    - name: Run update definitions script
+      run: bun run scripts/update-definitions.js
     
     - name: Check for changes
       id: verify-changed-files
