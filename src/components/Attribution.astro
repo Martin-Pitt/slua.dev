@@ -1,0 +1,13 @@
+---
+const { title, author, source, license } = Astro.props;
+
+let licensing;
+if(license && license.name && license.url) {
+	licensing = `<a href=${license.url}>${license.name}</a> License (see the complete license terms).`;
+} else {
+	licensing = `${license?.name} License`;
+}
+---
+<div class="attribution">
+	Uses content adapted from <a href={source}>{title}</a>. Copyright © {author}. Licensed under the {licensing}
+</div>

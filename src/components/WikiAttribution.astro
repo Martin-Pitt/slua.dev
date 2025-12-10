@@ -1,0 +1,15 @@
+---
+import Attribution from './Attribution.astro';
+const { article } = Astro.props;
+const url = `https://wiki.secondlife.com/wiki/${article}`;
+const title = `Second Life Wiki article ${article.replace(/:/, ': ').replace(/_/g, ' ')}`;
+---
+<Attribution
+	title={title}
+	author="2007-2012 Linden Research, Inc."
+	source={url}
+	license={{
+		url: "https://creativecommons.org/licenses/by-sa/3.0/",
+		name: 'Creative Commons Attribution-Share Alike 3.0'
+	}}
+/>
