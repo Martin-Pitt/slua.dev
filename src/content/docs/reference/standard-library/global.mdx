@@ -5,27 +5,16 @@ sidebar:
     order: 0
 ---
 
-:::caution[Stub]
-This documentation page is a stub and is currently under development.
-:::
-
 {/* Trying to order some useful groups towards the top */}
 ```luau
 function type(obj: any): string
 function tonumber(s: string, base: number?): number?
 function tostring(obj: any): string
-```
-:::tip
-Second Life also adds the following:
-```luau
 function tovector(s: string): vector3
 function toquaternion(s: string): quaternion
 function torotation(s: string): quaternion
 function touuid(s: string): uuid
-```
-:::
 
-```luau
 function print(args: ...any)
 function assert<T>(value: T, message: string?): T
 function error(obj: any, level: number?)

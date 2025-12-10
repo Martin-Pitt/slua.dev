@@ -12,6 +12,7 @@ export default defineConfig({
 			// logo: { src: './src/assets/logo.svg' },
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' }],
 			tableOfContents: false,
+			pagination: false,
 			editLink: {
 				baseUrl: 'https://github.com/Martin-Pitt/slua.dev/edit/main/',
 			},
@@ -28,7 +29,13 @@ export default defineConfig({
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [
+						{ label: 'Categories', slug: 'reference' },
+						{ label: 'Types', autogenerate: { directory: 'reference/types' } },
+						{ label: 'Standard Library', autogenerate: { directory: 'reference/standard-library' } },
+						{ label: 'Events', slug: 'reference/events' },
+						{ label: 'Constants', slug: 'reference/constants' },
+					],
 				},
 				{
 					label: 'Features',
