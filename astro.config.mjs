@@ -8,7 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'SLua Dev',
-			favicon: '/public/favicon.svg',
+			favicon: '/favicon.svg',
 			// logo: { src: './src/assets/logo.svg' },
 			logo: {
 				light: './src/assets/logo.light.svg',
