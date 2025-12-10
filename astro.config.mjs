@@ -8,8 +8,12 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'SLua Dev',
-			// favicon: '/favicon.svg',
+			favicon: '/public/favicon.svg',
 			// logo: { src: './src/assets/logo.svg' },
+			logo: {
+				light: './src/assets/logo.light.svg',
+				dark: './src/assets/logo.dark.svg',
+			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' }],
 			tableOfContents: false,
 			pagination: false,
