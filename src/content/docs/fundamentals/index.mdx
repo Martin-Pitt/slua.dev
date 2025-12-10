@@ -22,7 +22,11 @@ You can write SLua scripts in the script editor in the viewer.
 ### Setting Up VS Code for SLua Scripting
 1. Create a new workspace folder for your Second Life scripts
 2. Open the folder in VS Code
-3. Configure the *External Script Editor* in Preferences → Advanced → Script Development so that it opens up VS Code
+3. Now back to your Second Life viewer, configure the *External Script Editor* setting in your preferences → Advanced → Script Development so that it opens up VS Code
+    - On Windows this might look something like:
+        ```
+        "C:\Program Files\Microsoft VS Code\Code.exe" "%s"
+        ```
 4. Right-click on an object in Second Life
 5. Select "Edit" → "Scripts"
 6. Click "New Script" or "Edit" on existing script
