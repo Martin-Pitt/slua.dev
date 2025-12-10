@@ -40,8 +40,8 @@ export default defineConfig({
 			expressiveCode: {
 				shiki: {
 					langs: [
-						JSON.parse(await readFile('./config/slua_grammar.json', 'utf-8')),
-						JSON.parse(await readFile('./config/lsl_grammar.json', 'utf-8')),
+						JSON.parse(await readFile('./src/data/slua_grammar.json', 'utf-8')),
+						JSON.parse(await readFile('./src/data/lsl_grammar.json', 'utf-8')),
 					],
 				},
 			},
