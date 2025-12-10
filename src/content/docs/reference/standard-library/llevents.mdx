@@ -5,7 +5,7 @@ sidebar:
     order: 1
 ---
 
-```luau
+```slua
 function LLEvents:on(eventName: string, callback: function): function
 function LLEvents:once(eventName: string, callback: function): function
 function LLEvents:off(eventName: string, callback: function): boolean
@@ -13,7 +13,7 @@ function LLEvents:eventNames(): {string}
 function LLEvents:listeners(eventName: string): {[string]: {function}}
 ```
 
-```luau
+```slua
 function LLEvents.listen(channel: number, name: string, id: uuid, message: string)
 function LLEvents.touch_start(events: {DetectedEvent})
 ```

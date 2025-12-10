@@ -6,7 +6,7 @@ sidebar:
 ---
 
 {/* Note: sorted and grouped based on related functionality */}
-```luau
+```slua
 function string:sub(f: number, t: number?): string
 function string:lower(): string
 function string:upper(): string
@@ -28,12 +28,12 @@ function string:unpack(s: string): ...any
 
 ## Usage
 Variable:
-```luau
-local str: string = "test string"
+```slua
+local str = "test string"
 local parts: {string} = str:split("t")
 ```
 
 With a literal string:
-```luau
+```slua
 local parts: {string} = ("literal"):split("t")
 ```

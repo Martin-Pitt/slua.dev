@@ -6,7 +6,7 @@ sidebar:
 ---
 
 {/* Note: sorted and grouped based on related functionality */}
-```luau
+```slua
 function table.create<V>(n: number, v: V?): {V}
 function table.insert<V>(t: {V}, v: V)
 function table.insert<V>(t: {V}, i: number, v: V)
@@ -31,7 +31,7 @@ function table.clone(t: table): table
 
 
 ## Deprecated
-```luau
+```slua
 function table.foreach<K, V, R>(t: { [K]: V }, f: (K, V) -> R?): R?
 function table.foreachi<V, R>(t: {V}, f: (number, V) -> R?): R?
 function table.getn<V>(t: {V}): number
