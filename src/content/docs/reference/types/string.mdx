@@ -1,0 +1,39 @@
+---
+title: string
+description: String library in Luau
+sidebar:
+    order: 103
+---
+
+{/* Note: sorted and grouped based on related functionality */}
+```luau
+function string:sub(f: number, t: number?): string
+function string:lower(): string
+function string:upper(): string
+function string:rep(n: number): string
+function string:reverse(): string
+function string:len(): number -- equivalent to #s
+
+function string:split(sep: string?): {string}
+function string:match(p: string, init: number?): ...string?
+function string:find(p: string, init: number?, plain: boolean?): (number?, number?, ...string)
+function string:format(args: ...any): string
+function string:gmatch(p: string): <iterator>
+function string:gsub(p: string, f: function | table | string, maxs: number?): (string, number)
+
+function string:byte(f: number?, t: number?): ...number
+function string:pack(args: ...any): string
+function string:unpack(s: string): ...any
+```
+
+## Usage
+Variable:
+```luau
+local str: string = "test string"
+local parts: {string} = str:split("t")
+```
+
+With a literal string:
+```luau
+local parts: {string} = ("literal"):split("t")
+```
