@@ -6,9 +6,33 @@ sidebar:
     order: -1
 ---
 
+## Getting Started with SLua Scripting
 :::caution[Stub]
-This documentation page is a stub and is currently under development.
+This section is a stub and is currently under development.
 :::
+
+## Development Environment
+You can write SLua scripts in the script editor in the viewer.
+
+- Currently you specifically need the [Second Life Project Lua Editor](https://releasenotes.secondlife.com/viewer.html) to be able to compile scripts to SLua.
+- Additionally only the regions on at [SLua Beta Landing](https://maps.secondlife.com/secondlife/SLua%20Beta%20Landing) and the beta grid currently support SLua.
+- If you want to use an external editor, then you can use [VS Code](https://code.visualstudio.com/) with the [Second Life External Scripting extension](https://github.com/secondlife/sl-vscode-plugin).
+    - [VSCodium](https://vscodium.com/) is an alternative to VS Code if you prefer.
+
+### Setting Up VS Code for SLua Scripting
+1. Create a new workspace folder for your Second Life scripts
+2. Open the folder in VS Code
+3. Configure the *External Script Editor* in Preferences → Advanced → Script Development so that it opens up VS Code
+4. Right-click on an object in Second Life
+5. Select "Edit" → "Scripts"
+6. Click "New Script" or "Edit" on existing script
+7. Rename the script and create an equivalent file in your VS Code workspace but with the `.luau` extension
+8. Choose external editor - VS Code will automatically open, showing a temporary file for moment but then switching over to the equivalent file as the master script
+9. Edit in VS Code with full preprocessing support
+10. Save to sync changes back to the viewer
+
+
+
 
 
 
