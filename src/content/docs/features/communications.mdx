@@ -3,33 +3,54 @@ title: Communications
 description: Communications between scripts, objects, avatars and external systems in Second Life
 ---
 
-:::caution[Stub]
-This documentation page is a stub and is currently under development.
-:::
-
-
 ## Owner say / print
-> Using `ll.OwnerSay`/`print` to communicate with the owner directly; This is the 101 of scripting, very important! — Nexii
+[`ll.OwnerSay`](../../reference/standard-library/ll#OwnerSay) (aliased by [`print`](../../reference/standard-library/global#print)) is the simplest way for a script to communicate with the owner of the object directly.
 
+This is pretty much your most common way to output what is going on inside your script, for debugging, information, or interaction purposes.
+
+It stands out from other types of object chat and has no throttling limit.
 
 ## Listeners
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
 > Write about listeners, channels, ll.Say and variants — Nexii
-### Channels
-### Sending Messages
+> ### Channels
+> ### Sending Messages
 
 
 ## Link Messages
-> Link messages for communication between linked prims / scripts in the same linkset object — Nexii
+Link messages are an easy way to communicate between scripts in the same object.
+
+You use [`ll.MessageLinked`](../../reference/standard-library/ll#MessageLinked) to send messages and the [`link_message`](../../reference/events#link_message) event to receive them.
+
+With one link message you can send across a number and two strings. From the [`link_message`](../../reference/events#link_message) event you can also tell the link number of the script that sent the message from.
 
 
 ## Linkset Data
-> Linkset Data can be used to communicate between scripts passively/async (settings/data/queues via `ll.LinksetDataRead`) or even actively in certain cases (`linkset_data` event) — Nexii
+Linkset data is a way to store a lot of data in an object permanently and have it accessible to all scripts in the object. The amount of data you can store is up to 128KB and is stored in a key-value format as strings.
+
+This can be used to passively share data between scripts.
+
+There is also a [`linkset_data`](../../reference/events#linkset_data) event that can be used to monitor changes to linkset data, however it should be used with caution as it can be triggered very frequently depending how active your script is with linkset data.
+
+Linkset data can be used many ways, from storing user settings to a clever way to slowly process through a queue of data.
+
+:::tip[Performance]
+It is recommended to use a strategy of storing data across many keys rather than one big blob of data as this cuts down the performance cost of reading and writing data.
+:::
 
 
 ## HTTP Requests
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
 > How to do a HTTP request to an external web server, or even another object (Web Server below) — Nexii
 
 
 ## Web Server (HTTP-in)
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
 > Having it explained as a web server will be more useful to learners than 'HTTP-in' or 'HTTP responses' which are a bit confusing or vague and sound more like the advanced functionality that it is but also approachable with this mental model — Nexii
 
