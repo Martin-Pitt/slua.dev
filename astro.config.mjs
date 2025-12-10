@@ -13,20 +13,16 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' }],
 			tableOfContents: false,
 			pagination: false,
-			editLink: {
-				baseUrl: 'https://github.com/Martin-Pitt/slua.dev/edit/main/',
-			},
+			locales: { root: { label: 'English', lang: 'en' } },
+			editLink: { baseUrl: 'https://github.com/Martin-Pitt/slua.dev/edit/main/' },
 			components: {
 				// Sidebar: './src/components/starlight/Sidebar.astro',
 			},
 			customCss: [
-				// './src/styles/custom.css',
+				'./src/styles/custom.css',
 			],
 			sidebar: [
-				{
-					label: 'Fundamentals',
-					autogenerate: { directory: 'fundamentals' },
-				},
+				{ label: 'Fundamentals', autogenerate: { directory: 'fundamentals' } },
 				{
 					label: 'Reference',
 					items: [
@@ -37,18 +33,9 @@ export default defineConfig({
 						{ label: 'Constants', slug: 'reference/constants' },
 					],
 				},
-				{
-					label: 'Features',
-					autogenerate: { directory: 'features' },
-				},
-				{
-					label: 'Guides',
-					autogenerate: { directory: 'guides' },
-				},
-				{
-					label: 'Recipes',
-					autogenerate: { directory: 'recipes' },
-				},
+				{ label: 'Features', autogenerate: { directory: 'features' } },
+				{ label: 'Guides', autogenerate: { directory: 'guides' } },
+				{ label: 'Recipes', autogenerate: { directory: 'recipes' } },
 			],
 			expressiveCode: {
 				shiki: {
