@@ -17,4 +17,28 @@
 		--sl-text-xs: 0.79rem;
 		--sl-text-2xs: 0.75rem;
 	}
+	
+	.sl-link-button {
+		&:hover {
+			color: var(--sl-color-text-accent)
+		}
+		&:active {}
+		
+		&.primary {
+			&:hover {
+				background: color-mix(in srgb, var(--sl-color-text-accent) 60%, var(--sl-color-white) 40%);
+				color: var(--sl-color-black);
+			}
+			&:active {}
+		}
+	}
+	
+	.site-title {
+		span {
+			transition: transform 120ms;
+		}
+		&:hover span {
+			transform: translateY(-5%);
+		}
+	}
 }
