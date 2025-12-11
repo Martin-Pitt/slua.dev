@@ -56,7 +56,7 @@ import List from '@components/List.jsx';
         'llToUpper', 'llToLower', // string.upper, string.lower
         'llVecMag', // vector.magnitude
         'llVecNorm', // vector.normalize
-        'llVecDist', // (v1 - v2):magnitude()
+        'llVecDist', // vector.magnitude(v1 - v2)
         // Anything else?
     ].includes(functionName)) return false; // Functions replaced by standard Lua/SLua equivalents
     return true;
