@@ -17,7 +17,9 @@ You can check out the complete guide at [Suzanna’s SLua guide](https://suzanna
 ## The language: Lua compared to LSL
 Standard Lua and Luau have some differences. Most of the next code runs in both of them.
 I'm using "Luau" at the end of the comment in the first line for Luau only code.
-I'm using "Slua" for SLua only code.
+I'm using "SLua" for SLua only code.
+
+
 
 
 ### Types and variables
@@ -66,7 +68,7 @@ myMessage = (string)myCounter;
 	</Fragment>
 </Comparison>
 
-Comments use -- instead of //
+Comments use `--` instead of `//`
 
 The semicolon at the end of the lines is optional and very rarely used.
 
@@ -74,7 +76,7 @@ Variables are not declared with a type, they can take values of any type.
 
 Their type depends on what value we assign to them. 
 
-We can see it in lines 8-11. The function "type" returns the name of the type and "print" outputs it to the console. I have added the text printed as a comment.
+We can see it in lines 8-11. The function `type` returns the name of the type and `print` outputs it to the console. I have added the text printed as a comment.
 
 These are the three basic types: `boolean` (`true` or `false`), `number` (which includes integers and floats) and `string`.
 
@@ -104,6 +106,9 @@ Variables that can have any type are very useful but sometimes but can lead to e
 Luau adds capabilities of Type-checking and Linting, that SLua will also have:
 - Type checking automatically infers types from the values assigned to variables or manually by adding type annotations. These annotations can define types, combinations of types, or subtypes. There are directives that allow to control the level of type checking in each script, ranging from none to stricter than LSL.
 - Linting identifies possible issues like uninitialized or unused variables, duplicated functions, mismatched parameter counts, return values, and many more. There are also directives to enable or disable specific linting checks.
+
+
+
 
 ### Operators
 
@@ -180,6 +185,9 @@ The increment and decrement operators, `++` and `--`, do not exist.
 
 The compound operators, `+=` and so on, do not exist in standard Lua, but they exist in *Luau*, so SLua will also have them: `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `^=`.
 
+
+
+
 ### If, while, for, repeat 
 
 <Comparison>
@@ -254,6 +262,9 @@ The `{` and `}` are not used here (they are used for tables as we will see later
 The `for` in lines 20-22 is one of the types of `for`, we will see the other one later. Its three values are *start*, *end* and *step*.
 
 We can't use an assignment in a condition. In Lua, assignments are statements, not expressions. In case that we write a  `=`  instead of a  `==`  in a condition, we will get an error when compiling.
+
+
+
 
 ### Functions, ll functions
 
@@ -350,6 +361,9 @@ llSetPos(llGetPos() + <0, 0, 1>);
 </Comparison>
 
 This is how LL functions look in SLua. We have all the LL functions (including LinksetData, Experiences, all) with the same parameters and constants and the difference is calling them with a `.` between `ll` and the name of the function.
+
+
+
 
 ### Tables as lists 
 
@@ -458,6 +472,9 @@ llSay( 0, llListFindList( fruits, ["Orange"] ) )  // 3
 
 Lua doesn't have a function to find an element in the array table, but Luau has and also SLua.
 
+
+
+
 ### Tables as (key, value) pairs (like the linkset data)
 
 <Comparison>
@@ -552,6 +569,9 @@ We see that the fruits are printed in a random order. This happens because table
 We read and write values in the array using `[` and `]` with the key. We delete a key-value by assigning the key to `nil`.
 
 And alternative way is with `tablename.key`, lines 28-34.
+
+
+
 
 ### Tables of functions instead of if...elseif chain 
 
@@ -648,11 +668,14 @@ Tables can contain functions. In this example we are replacing a long sequence o
 
 In lines 22-28 we create the table, with the name of the option as the key, and the function (without parentheses) as the value.
 
-"local", in line 22, means that the table is a local variable of the function, without `local` it would be a global variable.
+`local`, in line 22, means that the table is a local variable of the function, without `local` it would be a global variable.
 
 In line 30 we check if the option exists and we call the function, adding the parentheses.
 
 Of course, the `if... elseif` chain also works in Lua, but using a table is more efficient and the code is more clear.
+
+
+
 
 ### Events and states
 
