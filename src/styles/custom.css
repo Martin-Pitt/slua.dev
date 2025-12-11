@@ -18,6 +18,11 @@
 		--sl-text-2xs: 0.75rem;
 	}
 	
+	.hero .sl-link-button {
+		transition: transform 120ms;
+		&:hover { transform: translateY(-5%); }
+	}
+	
 	.sl-link-button {
 		&:hover {
 			color: var(--sl-color-text-accent)
