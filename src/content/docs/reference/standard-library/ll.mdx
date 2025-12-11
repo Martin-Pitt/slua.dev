@@ -31,6 +31,34 @@ import List from '@components/List.jsx';
         'llGetAndResetTime',
         'llSetMemoryLimit',
     ].includes(functionName)) return false; // Functions removed from ll.* specifically
+    if([
+        'llAbs', 'llFabs', // math.abs, math.fabs
+        'llCeil', 'llRound', 'llFloor', // math.ceil, math.round, math.floor
+        'llModPow', // (a^b)%c
+        'llSqrt', // math.sqrt
+        'llSin', 'llCos', 'llTan', // math.sin, math.cos, math.tan
+        'llAsin', 'llAcos', 'llAtan', 'llAtan2', // math.asin, math.acos, math.atan, math.atan2
+        'llPow', 'llExp', 'llLog', 'llLog10', // math.pow, math.exp, math.log, math.log10
+        'llFrand', // math.random
+        'llChar', 'llOrd', // string.byte, string.char, utf8.codepoint, utf8.char
+        'llGetTime', // os.clock
+        'llGetUnixTime', // os.time
+        'llGetTimestamp', 'llGetDate', // os.date
+        'llStringLength', // #string, string.len, utf8.len
+        /*
+        'llDeleteSubString', // string.sub
+        'llGetSubString', // string.sub
+        'llSubStringIndex', // string.find
+        'llReplaceSubString', // string.gsub
+        These are actually utf8-friendly, so not the same, and there are no utf8.* equivalents either
+        Mind to keep the utf8 aspect in mind, the string library is pure ascii bytes!
+        */
+        'llToUpper', 'llToLower', // string.upper, string.lower
+        'llVecMag', // vector.magnitude
+        'llVecNorm', // vector.normalize
+        'llVecDist', // (v1 - v2):magnitude()
+        // Anything else?
+    ].includes(functionName)) return false; // Functions replaced by standard Lua/SLua equivalents
     return true;
 })} client:load/>
 
