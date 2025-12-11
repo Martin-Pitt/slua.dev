@@ -2,10 +2,21 @@
 title: quaternion
 description: Quaternion reference
 sidebar:
-    order: 1
+    order: 4
 ---
 
 ```slua
+(quaternion * quaternion): quaternion
+(quaternion / quaternion): quaternion
+(quaternion + quaternion): quaternion
+(quaternion - quaternion): quaternion
+-quaternion: quaternion
+
+quaternion.x: number
+quaternion.y: number
+quaternion.z: number
+quaternion.s: number
+
 function quaternion(x: number, y: number, z: number, s: number): quaternion
 function toquaternion(string: string): quaternion
 ```

@@ -2,13 +2,23 @@
 title: vector
 description: Vector library in Luau
 sidebar:
-    order: 0
+    order: 3
 ---
 
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
 vector.zero: vector -- vector(0, 0, 0)
 vector.one: vector -- vector(1, 1, 1)
+
+(vector * vector): number -- dot-product
+(vector % vector): vector -- cross-product
+(vector * quaternion): vector -- rotate vector by quaternion
+(vector / quaternion): vector -- rotate vector by quaternion
+(vector / number): vector
+
+vector.x: number
+vector.y: number
+vector.z: number
 
 function vector(x: number, y: number, z: number): vector
 function tovector(string: string): vector

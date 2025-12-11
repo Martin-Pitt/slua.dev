@@ -1,0 +1,36 @@
+---
+title: number
+description: Number reference
+sidebar:
+    order: 2
+---
+
+`number`s are double-precision (64-bit) floating-point numbers.
+
+```slua
+(number + number): number
+(number - number): number
+(number * number): number
+(number / number): number
+(number // number): number -- floor division
+(number ^ number): number -- exponentiation
+(number % number): number -- modulus
+-number: number
+
+number += number
+number -= number
+number *= number
+number /= number
+number //= number
+number ^= number
+number %= number
+
+number < number: boolean
+number <= number: boolean
+number > number: boolean
+number >= number: boolean
+number == number: boolean
+number ~= number: boolean
+
+function tonumber(s: string, base: number?): number?
+```
