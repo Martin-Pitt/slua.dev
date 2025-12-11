@@ -1,13 +1,14 @@
 ---
+import { Aside } from '@astrojs/starlight/components';
 const { title, author, source, license } = Astro.props;
+const isSpecificLicense = license && license.name && license.url;
 
-let licensing;
-if(license && license.name && license.url) {
-	licensing = `<a href=${license.url}>${license.name}</a> License (see the complete license terms).`;
-} else {
-	licensing = `${license?.name} License`;
-}
 ---
-<div class="attribution">
-	Uses content adapted from <a href={source}>{title}</a>. Copyright © {author}. Licensed under the {licensing}
-</div>
+<Aside title="Attribution">
+	Uses content adapted from <a href={source}>{title}</a>. Copyright © {author}. Licensed under the {
+		isSpecificLicense?
+			<Fragment><a href={license.url}>{license.name}</a> License (see the complete license terms).</Fragment>
+		:
+			<Fragment>{license?.name || license} License.</Fragment>
+	}
+</Aside>

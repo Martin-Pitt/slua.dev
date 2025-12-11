@@ -1,0 +1,25 @@
+---
+
+---
+
+<div class="comparison not-content">
+	<slot name="left"/>
+	<slot name="right"/>
+</div>
+
+<style>
+	@layer components {
+		.comparison {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+			/* gap: 0.5rem; */
+			
+			.expressive-code { display: contents; }
+			.expressive-code .frame pre { min-height: 100%; }
+			.expressive-code .gutter .ln {
+				min-width: var(--lnWidth, 2ch);
+				padding-inline: 1ch;
+			}
+		}
+	}
+</style>

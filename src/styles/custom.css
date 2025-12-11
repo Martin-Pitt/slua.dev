@@ -1,16 +1,20 @@
-:root {
-	--sl-content-width: 60rem;
-	
-	/* Major Second scale */
-	--sl-text-6xl: 4rem;
-	--sl-text-5xl: 2.027rem;
-	--sl-text-4xl: 1.802rem;
-	--sl-text-3xl: 1.602rem;
-	--sl-text-2xl: 1.424rem;
-	--sl-text-xl: 1.266rem;
-	--sl-text-lg: 1.125rem;
-	--sl-text-base: 1rem;
-	--sl-text-sm: 0.889rem;
-	--sl-text-xs: 0.79rem;
-	--sl-text-2xs: 0.75rem;
+@layer starlight, site, components;
+
+@layer site {
+	:root {
+		--sl-content-width: 60rem;
+		
+		/* Major Second scale */
+		--sl-text-6xl: 4rem;
+		--sl-text-5xl: 2.027rem;
+		--sl-text-4xl: 1.802rem;
+		--sl-text-3xl: 1.602rem;
+		--sl-text-2xl: 1.424rem;
+		--sl-text-xl: 1.266rem;
+		--sl-text-lg: 1.125rem;
+		--sl-text-base: 1rem;
+		--sl-text-sm: 0.889rem;
+		--sl-text-xs: 0.79rem;
+		--sl-text-2xs: 0.75rem;
+	}
 }

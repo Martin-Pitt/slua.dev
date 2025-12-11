@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { readFile } from 'fs/promises';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -48,6 +50,10 @@ export default defineConfig({
 						JSON.parse(await readFile('./src/data/lsl_grammar.json', 'utf-8')),
 					],
 				},
+				plugins: [pluginLineNumbers()],
+				defaultProps: {
+					showLineNumbers: false,
+				}
 			},
 		}),
 	],
