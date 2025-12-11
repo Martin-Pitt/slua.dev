@@ -5,9 +5,13 @@ sidebar:
     order: 0
 ---
 
+import Attribution from '@components/Attribution.astro'
+
+
 {/* Trying to order some useful groups towards the top */}
 ```slua
 function type(obj: any): string
+function typeof(obj: any): string
 function tonumber(s: string, base: number?): number?
 function tostring(obj: any): string
 function tovector(s: string): vector3
@@ -67,3 +71,129 @@ function setfenv(target: function | number, env: table)
 :::danger
 The above functions have been removed and are not available in Second Life SLua.
 :::
+
+
+## Full reference
+Most library functions are part of a library like `math` or `table`. However there are some that don't have any namespacing and are just global functions.
+
+
+```slua
+function type(obj: any): string
+```
+Returns the type of object, which is one of `nil`, `boolean`, `number`, `vector`, `string`, `table`, `function`, `userdata`, `thread`, or `buffer`.
+
+
+```slua
+function typeof(obj: any): string
+```
+Returns the type of the object; for userdata objects that have a metatable with the `__type` field and are defined by the host (not `newproxy`), returns the value for that key. For custom userdata objects, such as ones returned by `newproxy`, this function returns `userdata` to make sure host-defined types can not be spoofed.
+
+
+
+```slua
+function tonumber(s: string, base: number?): number?
+function tostring(obj: any): string
+function tovector(s: string): vector3
+function toquaternion(s: string): quaternion
+function torotation(s: string): quaternion
+function touuid(s: string): uuid
+```
+These functions allow you to convert between different types that SLua supports, typically from strings or into a string.
+
+
+
+```slua
+function print(args: ...any)
+```
+Prints all arguments into chat directly to the owner of object running the script. (Similar to `ll.OwnerSay`)
+
+
+```slua
+function assert<T>(value: T, message: string?): T
+```
+`assert` checks if the value is truthy; if it’s not (which means it’s `false` or `nil`), it raises an error. The error message can be customized with an optional parameter. Upon success the function returns the `value` argument.
+
+
+```slua
+function error(obj: any, level: number?)
+```
+`error` raises an error with the specified object. Note that errors don’t have to be strings, although they often are by convention; various error handling mechanisms like `pcall` preserve the error type. When `level` is specified, the error raised is turned into a string that contains call frame information for the caller at level `level`, where `1` refers to the function that called `error`. This can be useful to attribute the errors to callers, for example `error("Expected a valid object", 2)` highlights the caller of the function that called `error` instead of the function itself in the callstack.
+
+```slua
+function getmetatable(obj: any): table?
+function setmetatable(t: table, mt: table?)
+```
+`getmetatable` returns the metatable for the specified object; when object is not a table or a userdata, the returned metatable is shared between all objects of the same type. Note that when metatable is protected (has a `__metatable` key), the value corresponding to that key is returned instead and may not be a table.
+
+`setmetatable` changes metatable for the given table. Note that unlike `getmetatable`, this function only works on tables. If the table already has a protected metatable (has a `__metatable` field), this function errors.
+
+
+```slua
+function pcall(f: function, args: ...any): (boolean, ...any)
+function xpcall(f: function, e: function, args: ...any): (boolean, ...any)
+```
+`pcall` calls function `f` with parameters `args`. If the function succeeds, returns `true` followed by all return values of `f`. If the function raises an error, returns `false` followed by the error object. Note that `f` can yield, which results in the entire coroutine yielding as well.
+
+`xpcall` calls function `f` with parameters `args`. If the function succeeds, returns `true` followed by all return values of `f`. If the function raises an error, calls `e` with the error object as an argument, and returns `false` followed by the first return value of `e`. Note that `f` can yield, which results in the entire coroutine yielding as well. `e` can neither yield nor error - if it does raise an error, `xpcall` returns with `false` followed by a special error message.
+
+
+
+```slua
+function newproxy(mt: boolean?): userdata
+```
+Creates a new untyped userdata object; when `mt` is true, the new object has an empty metatable that can be modified using `getmetatable`.
+
+
+
+```slua
+function rawget<K, V>(t: { [K]: V }, k: K): V?
+function rawset<K, V>(t: { [K] : V }, k: K, v: V)
+function rawlen<K, V>(t: { [K]: V } | string): number
+```
+These functions provide raw access, bypassing the `__index`, `__newindex` and `__len` metamethods.
+
+
+```slua
+function rawequal(a: any, b: any): boolean
+```
+Returns `true` if `a` and `b` have the same type and point to the same object (for garbage collected types) or are equal (for value types).
+
+
+```slua
+function next<K, V>(t: { [K]: V }, i: K?): (K, V)?
+```
+Given the table `t`, returns the next key-value pair after `i` in the table traversal order, or nothing if `i` is the last key. When `i` is `nil`, returns the first key-value pair instead.
+
+```slua
+function select<T>(i: string, args: ...T): number
+function select<T>(i: number, args: ...T): ...T
+```
+When called with `'#'` as the first argument, returns the number of remaining parameters passed. Otherwise, returns the subset of parameters starting with the specified index. Index can be specified from the start of the arguments (using `1` as the first argument), or from the end (using `-1` as the last argument).
+
+```slua
+function ipairs(t: table): <iterator>
+```
+Returns the triple (generator, state, `nil`) that can be used to traverse the table using a `for` loop. The traversal results in key-value pairs for the numeric portion of the table; key starts from 1 and increases by 1 on each iteration. The traversal terminates when reaching the first `nil` value (so `ipairs` can’t be used to traverse array-like tables with holes).
+
+
+```slua
+function pairs(t: table): <iterator>
+```
+Returns the triple (generator, state, `nil`) that can be used to traverse the table using a `for` loop. The traversal results in key-value pairs for all keys in the table, numeric and otherwise, but doesn’t have a defined order.
+
+
+
+```slua
+function unpack<V>(a: {V}, f: number?, t: number?): ...V
+```
+Returns all values of `a` with indices in `[f..t]` range. `f` defaults to 1 and `t` defaults to `#a`. Note that this is equivalent to `table.unpack`.
+
+
+
+
+<Attribution
+	title="Luau Library Documentation"
+	source="https://luau.org/library"
+	author="2019-2025 Roblox Corporation, 1994–2019 Lua.org, PUC-Rio"
+	license="MIT"
+/>
