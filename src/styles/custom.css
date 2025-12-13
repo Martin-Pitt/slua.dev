@@ -2,6 +2,7 @@
 
 @layer site {
 	:root {
+		--sl-sidebar-width: 17rem;
 		--sl-content-width: 60rem;
 		
 		/* Major Second --- Minor Third */

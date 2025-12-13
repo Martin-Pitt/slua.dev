@@ -13,10 +13,10 @@ export default defineConfig({
         title: 'SLua Dev',
         favicon: '/favicon.svg',
         // logo: { src: './src/assets/logo.svg' },
-        logo: {
-            light: './src/assets/logo.light.svg',
-            dark: './src/assets/logo.dark.svg',
-        },
+        // logo: {
+        //     light: './src/assets/logo.light.svg',
+        //     dark: './src/assets/logo.dark.svg',
+        // },
         social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' }],
         tableOfContents: false,
         pagination: false,
@@ -24,6 +24,8 @@ export default defineConfig({
         locales: { root: { label: 'English', lang: 'en' } },
         editLink: { baseUrl: 'https://github.com/Martin-Pitt/slua.dev/edit/main/' },
         components: {
+            Header: './src/components/starlight/Header.astro',
+            PageFrame: './src/components/starlight/PageFrame.astro',
             // Sidebar: './src/components/starlight/Sidebar.astro',
         },
         customCss: [
