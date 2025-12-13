@@ -4,13 +4,13 @@
 	:root {
 		--sl-content-width: 60rem;
 		
-		/* Major Second scale */
+		/* Major Second --- Minor Third */
 		--sl-text-6xl: 4rem;
-		--sl-text-5xl: 2.027rem;
-		--sl-text-4xl: 1.802rem;
-		--sl-text-3xl: 1.602rem;
-		--sl-text-2xl: 1.424rem;
-		--sl-text-xl: 1.266rem;
+		--sl-text-5xl: clamp(2.027rem, 1em + 2.4vw, 2.986rem);
+		--sl-text-4xl: clamp(1.802rem, 1em + 2.1vw, 2.488rem);
+		--sl-text-3xl: clamp(1.602rem, 1em + 1.8vw, 2.074rem);
+		--sl-text-2xl: clamp(1.424rem, 1em + 1.5vw, 1.728rem);
+		--sl-text-xl: clamp(1.266rem, 1em + 1.2vw, 1.44rem);
 		--sl-text-lg: 1.125rem;
 		--sl-text-base: 1rem;
 		--sl-text-sm: 0.889rem;

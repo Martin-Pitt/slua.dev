@@ -20,6 +20,7 @@ export default defineConfig({
         social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' }],
         tableOfContents: false,
         pagination: false,
+        defaultLocale: 'root',
         locales: { root: { label: 'English', lang: 'en' } },
         editLink: { baseUrl: 'https://github.com/Martin-Pitt/slua.dev/edit/main/' },
         components: {
@@ -35,7 +36,7 @@ export default defineConfig({
                 items: [
                     { label: 'Categories', slug: 'reference' },
                     { label: 'Types', autogenerate: { directory: 'reference/types' } },
-                    { label: 'Standard Library', autogenerate: { directory: 'reference/standard-library' } },
+                    { label: 'Standard Library', autogenerate: { directory: 'reference/library' } },
                     { label: 'Events', slug: 'reference/events' },
                     { label: 'Constants', slug: 'reference/constants' },
                 ],
@@ -51,6 +52,7 @@ export default defineConfig({
                 showLineNumbers: false,
             },
             shiki: {
+                bundledLangs: [],
                 langs: [
                     JSON.parse(await readFile('./src/data/slua_grammar.json', 'utf-8')),
                     JSON.parse(await readFile('./src/data/lsl_grammar.json', 'utf-8')),
