@@ -40,6 +40,7 @@
 	}
 	
 	.site-title {
+		font-size: var(--sl-text-lg);
 		span {
 			transition: transform 120ms;
 		}
