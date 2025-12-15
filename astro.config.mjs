@@ -4,11 +4,14 @@ import starlight from '@astrojs/starlight';
 import preact from '@astrojs/preact';
 import { readFile } from 'fs/promises';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
+import starWarp from '@inox-tools/star-warp';
 
 
 
 // https://astro.build/config
 export default defineConfig({
+    site: 'https://slua.dev',
+    base: '/',
     integrations: [starlight({
         title: 'SLua Dev',
         favicon: '/favicon.svg',
@@ -60,5 +63,8 @@ export default defineConfig({
                 ],
             },
         },
+        plugins: [
+            starWarp(),
+        ],
     }), preact()],
 });
