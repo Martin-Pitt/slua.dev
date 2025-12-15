@@ -46,6 +46,7 @@ const DuplicateFunctions = {
 };
 
 const selectedCategory = signal(null);
+// const view = signal(''); // 'list' | 'table' | 'details'
 
 export default function LLTable() {
 	const fullItems = useMemo(() => {

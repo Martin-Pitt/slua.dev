@@ -26,7 +26,6 @@ export default defineConfig({
         components: {
             Header: './src/components/starlight/Header.astro',
             PageFrame: './src/components/starlight/PageFrame.astro',
-            // Sidebar: './src/components/starlight/Sidebar.astro',
         },
         customCss: [
             './src/styles/custom.css',
