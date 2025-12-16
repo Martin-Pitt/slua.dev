@@ -26,6 +26,7 @@ export default defineConfig({
         defaultLocale: 'root',
         locales: { root: { label: 'English', lang: 'en' } },
         editLink: { baseUrl: 'https://github.com/Martin-Pitt/slua.dev/edit/main/' },
+        lastUpdated: true,
         components: {
             Header: './src/components/starlight/Header.astro',
             PageFrame: './src/components/starlight/PageFrame.astro',
@@ -34,9 +35,10 @@ export default defineConfig({
             './src/styles/custom.css',
         ],
         sidebar: [
-            { label: 'Fundamentals', autogenerate: { directory: 'fundamentals' } },
+            { label: 'Fundamentals', collapsed: true, autogenerate: { directory: 'fundamentals' } },
             {
                 label: 'Reference',
+                collapsed: true,
                 items: [
                     { label: 'Categories', slug: 'reference' },
                     { label: 'Types', autogenerate: { directory: 'reference/types' } },
@@ -45,9 +47,9 @@ export default defineConfig({
                     { label: 'Constants', slug: 'reference/constants' },
                 ],
             },
-            { label: 'Features', autogenerate: { directory: 'features' } },
-            { label: 'Guides', autogenerate: { directory: 'guides' } },
-            { label: 'Recipes', autogenerate: { directory: 'recipes' } },
+            { label: 'Features', collapsed: true, autogenerate: { directory: 'features' } },
+            { label: 'Guides', collapsed: true, autogenerate: { directory: 'guides' } },
+            { label: 'Recipes', collapsed: true, autogenerate: { directory: 'recipes' } },
         ],
         expressiveCode: {
             themes: ['github-dark', 'github-light'],
