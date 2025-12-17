@@ -46,7 +46,7 @@ function ipairs(t: table): <iterator>
 function pairs(t: table): <iterator>
 ```
 :::tip
-[Luau supports generalized iterators](https://luau.org/syntax#generalized-iteration) as the modern and preferred method so you don't need to use the obsolete `ipairs` and `pairs` functions:
+[Luau supports generalized iterators](https://luau.org/syntax#generalized-iteration) as the modern and preferred method for iterating over tables:
 ```slua
 local arrayTable = {12, 34, 56}
 for index, value in arrayTable do
