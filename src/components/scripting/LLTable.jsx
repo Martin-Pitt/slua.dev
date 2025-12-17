@@ -457,6 +457,11 @@ export default function LLTable() {
 							color: inherit;
 							text-overflow: ellipsis;
 							cursor: pointer;
+							
+							option {
+								background-color: var(--sl-color-bg-nav);
+								color: var(--sl-color-gray-1)
+							}
 						}
 							
 						.icon {
