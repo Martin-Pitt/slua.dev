@@ -81,8 +81,8 @@ export default function LLTable() {
 		selectedCategory.value = e.target.value || null;
 	}, []);
 	
-	const hasDuplicateItems = useMemo(() => !selectedCategory.value || duplicateItems.some(({ categories }) => categories.includes(selectedCategory.value)), [selectedCategory.value]);
-	const hasRemovedItems = useMemo(() => !selectedCategory.value || removedItems.some(({ categories }) => categories.includes(selectedCategory.value)), [selectedCategory.value]);
+	const hasDuplicateItems = useMemo(() => selectedCategory.value? duplicateItems.some(({ categories }) => categories.includes(selectedCategory.value)) : !!duplicateItems.length, [selectedCategory.value]);
+	const hasRemovedItems = useMemo(() => selectedCategory.value? removedItems.some(({ categories }) => categories.includes(selectedCategory.value)) : !!removedItems.length, [selectedCategory.value]);
 	
 	return (<>
 		<div class="filterable-list not-content">
@@ -187,8 +187,10 @@ export default function LLTable() {
 				
 				.duplicated-functionality,
 				.removed-functions {
+					${selectedCategory.value && `
 					li { display: none }
 					li[data-tags*="${selectedCategory.value}"] { display: list-item }
+					`}
 					
 					&:has(ul:empty) { display: none }
 				}
