@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'preact/hooks';
 import { signal, effect, computed } from '@preact/signals';
+import classNames from 'classnames';
 
 import ll_categories from '~/data/ll_categories.json';
 import lsl_definitions from '~/data/lsl_definitions.json';
@@ -46,7 +47,33 @@ const DuplicateFunctions = {
 };
 
 const selectedCategory = signal(null);
-// const view = signal(''); // 'list' | 'table' | 'details'
+const view = signal('list'); // 'list' | 'details'
+const search = signal('');
+
+function sortByRelevance(a, b) {
+	const searchTerm = search.value.toLowerCase();
+	const aNameIndex = a.name.toLowerCase().indexOf(searchTerm);
+	const bNameIndex = b.name.toLowerCase().indexOf(searchTerm);
+	if(aNameIndex !== -1 && bNameIndex === -1) return -1;
+	if(aNameIndex === -1 && bNameIndex !== -1) return 1;
+	if(aNameIndex !== bNameIndex) return aNameIndex - bNameIndex;
+	
+	return a.name.localeCompare(b.name);
+}
+
+function debounce(func, wait) {
+	let timeout;
+	return function() {
+		const context = this;
+		const args = arguments;
+		const later = function() {
+			timeout = null;
+			func.apply(context, args);
+		};
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+	};
+};
 
 export default function LLTable() {
 	const fullItems = useMemo(() => {
@@ -62,9 +89,9 @@ export default function LLTable() {
 	}, []);
 	
 	const { items, categories, translations, removedItems, duplicateItems } = useMemo(() => {
+		const items = [];
 		const removedItems = [];
 		const duplicateItems = [];
-		const items = [];
 		
 		for(const item of fullItems) {
 			if(RemovedFunctions[item.name]) removedItems.push(item);
@@ -77,51 +104,176 @@ export default function LLTable() {
 		return { items, categories, translations, removedItems, duplicateItems };
 	}, [fullItems]);
 	
-	const onChange = useCallback((e) => {
-		selectedCategory.value = e.target.value || null;
+	const { narrowItems, narrowRemoved, narrowDuplicates } = useMemo(() => {
+		const searchTerm = search.value.toLowerCase();
+		const narrowItems = searchTerm? items.filter(({ name, categories }) => {
+			if(name.toLowerCase().includes(searchTerm)) return true;
+			for(const category of categories) {
+				if(category.toLowerCase().includes(searchTerm)) return true;
+				const translated = Translations[category];
+				if(translated && translated.toLowerCase().includes(searchTerm)) return true;
+			}
+			return false;
+		}) : items;
+		
+		const narrowRemoved = [];
+		for(const item of removedItems) {
+			if(item.name.toLowerCase().includes(searchTerm)) narrowRemoved.push(item);
+			else {
+				for(const category of item.categories) {
+					if(category.toLowerCase().includes(searchTerm)) {
+						narrowRemoved.push(item);
+						break;
+					}
+					const translated = Translations[category];
+					if(translated && translated.toLowerCase().includes(searchTerm)) {
+						narrowRemoved.push(item);
+						break;
+					}
+				}
+			}
+		}
+		
+		const narrowDuplicates = [];
+		for(const item of duplicateItems) {
+			if(item.name.toLowerCase().includes(searchTerm)) narrowDuplicates.push(item);
+			else {
+				for(const category of item.categories) {
+					if(category.toLowerCase().includes(searchTerm)) {
+						narrowDuplicates.push(item);
+						break;
+					}
+					const translated = Translations[category];
+					if(translated && translated.toLowerCase().includes(searchTerm)) {
+						narrowDuplicates.push(item);
+						break;
+					}
+				}
+			}
+		}
+		
+		return { narrowItems, narrowDuplicates, narrowRemoved };
+	}, [items, search.value]);
+	
+	const onChange = useCallback((event) => {
+		selectedCategory.value = event.target.value || null;
 	}, []);
 	
-	const hasDuplicateItems = useMemo(() => selectedCategory.value? duplicateItems.some(({ categories }) => categories.includes(selectedCategory.value)) : !!duplicateItems.length, [selectedCategory.value]);
-	const hasRemovedItems = useMemo(() => selectedCategory.value? removedItems.some(({ categories }) => categories.includes(selectedCategory.value)) : !!removedItems.length, [selectedCategory.value]);
+	const onSearch = useCallback(debounce((event) => {
+		search.value = event.target.value;
+	}, 20), []);
+	
+	const hasDuplicateItems = !!narrowDuplicates?.length; // useMemo(() => selectedCategory.value? duplicateItems.some(({ categories }) => categories.includes(selectedCategory.value)) : !!duplicateItems.length, [selectedCategory.value]);
+	const hasRemovedItems = !!narrowRemoved?.length; // useMemo(() => selectedCategory.value? removedItems.some(({ categories }) => categories.includes(selectedCategory.value)) : !!removedItems.length, [selectedCategory.value]);
 	
 	return (<>
-		<div class="filterable-list not-content">
-			<label>
-				Categories: <select class="tag-filter" onChange={onChange} ref={element => element && (selectedCategory.value = element.value)}>
-					<option value="">All</option>
-					{categories.map(tag => <option value={tag}>{translations[tag]}</option>)}
-				</select>
-			</label>
+		<div class="library-view not-content">
+			<div class="options">
+				<input class="search" type="search" placeholder="Fuzzy Search" value={search.value} onInput={onSearch} />
+				{/* <div class="view" role="group" aria-label="View Mode">
+					<button type="button" class={classNames({ selected: view.value === 'list' })} aria-label="List View" title="List View" onClick={() => view.value = 'list'}>
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M4 6H20V4H4V6ZM4 13H20V11H4V13ZM4 20H20V18H4V20Z"></path></svg>
+					</button>
+					<button type="button" class={classNames({ selected: view.value === 'details' })} aria-label="Detailed View" title="Detailed View" onClick={() => view.value = 'details'}>
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M4 6H14V4H4V6ZM16 6H20V4H16V6ZM4 13H14V11H4V13ZM16 13H20V11H16V13ZM4 20H14V18H4V20ZM16 20H20V18H16V20Z"></path></svg>
+					</button>
+				</div> */}
+				<label class="categories dropdown">
+					<span class="sr-only">Select category</span>
+					<select onChange={onChange} ref={element => element && (selectedCategory.value = element.value)}>
+						<option value="">All Categories</option>
+						{categories.map(tag => <option value={tag}>{translations[tag]}</option>)}
+					</select>
+					<svg aria-hidden="true" class="icon caret" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"></path></svg>
+				</label>
+			</div>
 			<div class="expressive-code">
 				<figure class="frame not-content">
 					<figcaption class="header"></figcaption>
 					<pre data-language="slua">
+						{selectedCategory?.value? (
 						<code class="raw-list">
-							{items.map(({ name, categories }) => {
-								const functionName = name.replace('ll.', '');
+							{narrowItems
+							?.sort(sortByRelevance)
+							.map(({ name, categories }) => {
+								let functionName = name.replace('ll.', '');
+								let slug = functionName.toLowerCase();
+								
+								// If search then use <mark> tags around matched text
+								if(search.value) {
+									const regex = new RegExp(`(${search.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+									functionName = functionName.replace(regex, '<mark>$1</mark>');
+								}
+								
 								return (
 									<div key={name} data-tags={categories.join(' ')} class="ec-line">
-										<div class="code"><a href={`./${functionName.toLowerCase()}`}><span style="--0:#F97583;--1:#BF3441">function</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">ll</span><span style="--0:#E1E4E8;--1:#24292E">.</span><span class="method" style="--0:#B392F0;--1:#6F42C1">{functionName}</span><span style="--0:#E1E4E8;--1:#24292E">(</span><span style="--0:#E1E4E8;--1:#24292E">)</span></a></div>
+										<div class="code"><a href={`./${slug}`}><span style="--0:#F97583;--1:#BF3441">function</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">ll</span><span style="--0:#E1E4E8;--1:#24292E">.</span><span class="method" style="--0:#B392F0;--1:#6F42C1" dangerouslySetInnerHTML={{ __html: functionName }}/><span style="--0:#E1E4E8;--1:#24292E">(</span><span style="--0:#E1E4E8;--1:#24292E">)</span></a></div>
 									</div>
 								)
 							})}
 						</code>
+						):(
 						<code class="categorised-list">
-							{categories.map((category, index) => (
-								<>
-								{index? <div class="ec-line"><div class="code">{'\n'}</div></div> : null}
-								<div class="ec-line"><div class="code"><span style="--0:#99A0A6;--1:#616972">-- {translations[category]}</span></div></div>
-								{items.filter(({ categories }) => categories.includes(category)).map(({ name, categories }) => {
-									const functionName = name.replace('ll.', '');
-									return (
-										<div key={name} class="ec-line">
-											<div class="code"><a href={`./${functionName.toLowerCase()}`}><span style="--0:#F97583;--1:#BF3441">function</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">ll</span><span style="--0:#E1E4E8;--1:#24292E">.</span><span class="method" style="--0:#B392F0;--1:#6F42C1">{functionName}</span><span style="--0:#E1E4E8;--1:#24292E">(</span><span style="--0:#E1E4E8;--1:#24292E">)</span></a></div>
-										</div>
-									)
-								})}
-								</>
-							))}
+							{categories
+							.filter(category => narrowItems?.some(({ categories }) => categories.includes(category)))
+							// If search then sort by categories that have direct match or match in their items
+							.sort((a, b) => {
+								const searchTerm = search.value.toLowerCase();
+								
+								const aCategoryIndex = a.replace(/_/g, ' ').toLowerCase().indexOf(searchTerm);
+								const bCategoryIndex = b.replace(/_/g, ' ').toLowerCase().indexOf(searchTerm);
+								if(aCategoryIndex !== -1 && bCategoryIndex === -1) return -1;
+								if(aCategoryIndex === -1 && bCategoryIndex !== -1) return 1;
+								if(aCategoryIndex !== bCategoryIndex) return aCategoryIndex - bCategoryIndex;
+								
+								const aItemIndex = narrowItems
+									.map(({ name }) => name.toLowerCase().indexOf(searchTerm))
+									.filter(index => index !== -1)
+									.sort((x, y) => x - y)[0] || Infinity;
+								const bItemIndex = narrowItems
+									.map(({ name }) => name.toLowerCase().indexOf(searchTerm))
+									.filter(index => index !== -1)
+									.sort((x, y) => x - y)[0] || Infinity;
+								if(aItemIndex !== bItemIndex) return aItemIndex - bItemIndex;
+								
+								// Finally alphabetical
+								return a.localeCompare(b);
+							})
+							.map((category, index) => {
+								let categoryName = translations[category] || category;
+								
+								if(search.value) {
+									const regex = new RegExp(`(${search.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+									categoryName = categoryName.replace(regex, '<mark>$1</mark>');
+								}
+								
+								return (
+									<>
+									{index? <div class="ec-line"><div class="code">{'\n'}</div></div> : null}
+									<div class="ec-line"><div class="code"><span style="--0:#99A0A6;--1:#616972">-- <span dangerouslySetInnerHTML={{ __html: categoryName }}></span></span></div></div>
+									{narrowItems
+									?.filter(({ categories }) => categories.includes(category))
+									.sort(sortByRelevance)
+									.map(({ name }) => {
+										let functionName = name.replace('ll.', '');
+										let slug = functionName.toLowerCase();
+										
+										// If search then use <mark> tags around matched text
+										if(search.value) {
+											const regex = new RegExp(`(${search.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+											functionName = functionName.replace(regex, '<mark>$1</mark>');
+										}
+										
+										return (
+											<div key={name} class="ec-line">
+												<div class="code"><a href={`./${slug}`}><span style="--0:#F97583;--1:#BF3441">function</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">ll</span><span style="--0:#E1E4E8;--1:#24292E">.</span><span class="method" style="--0:#B392F0;--1:#6F42C1" dangerouslySetInnerHTML={{ __html: functionName }}/><span style="--0:#E1E4E8;--1:#24292E">(</span><span style="--0:#E1E4E8;--1:#24292E">)</span></a></div>
+											</div>
+										)
+									})}
+								</>)
+							})}
 						</code>
+						)}
 					</pre>
 				</figure>
 			</div>
@@ -134,7 +286,7 @@ export default function LLTable() {
 			<div class="starlight-aside__content">
 				<p>The following functions provide duplicate functionality that is available through the namespaced libraries or operators which may also offer better performance:</p>
 				<ul>
-					{duplicateItems.map(({ name, categories }) => (
+					{narrowDuplicates?.map(({ name, categories }) => (
 						<li data-tags={categories.join(' ')}>
 							<code>{name}</code> by <code>{DuplicateFunctions[name.replace('ll.', '')]}</code>
 						</li>
@@ -150,7 +302,7 @@ export default function LLTable() {
 			<div class="starlight-aside__content">
 				<p>The following functions are not available in <code dir="auto">ll</code> and may be available in <code dir="auto">llcompat</code> instead:</p>
 				<ul>
-					{removedItems.map(({ name, categories }) => (
+					{narrowRemoved?.map(({ name, categories }) => (
 						<li data-tags={categories.join(' ')}>
 							<code>{name}</code> - {RemovedFunctions[name.replace('ll.', '')]}
 						</li>
@@ -160,7 +312,7 @@ export default function LLTable() {
 		</aside>
 		<style>
 			{`@layer components {
-				.filterable-list {
+				.library-view {
 					code { display: block }
 					${selectedCategory.value? `
 					.categorised-list { display: none }
@@ -225,6 +377,100 @@ export default function LLTable() {
 					font-weight: var(--1fw, inherit);
 					text-decoration: var(--1td, inherit)
 				}
+				
+				
+				.options {
+					display: grid;
+					grid-template-columns: auto auto auto 1fr;
+					grid-gap: 20px;
+					align-items: baseline;
+					margin-bottom: 20px;
+					
+					.search {
+						height: 2rem;
+						padding-inline-start: 0.75rem;
+						padding-inline-end: 0.5rem;
+						border: 1px solid var(--sl-color-gray-5);
+						border-radius: 0.25rem;
+						background-color: var(--sl-color-black);
+						color: var(--sl-color-gray-2);
+						font-size: var(--sl-text-sm);
+						
+						&:hover {
+							border-color: var(--sl-color-gray-2);
+							color: var(--sl-color-white);
+						}
+						&::-webkit-search-cancel-button {
+							cursor: pointer;
+						}
+					}
+					
+					.view {
+						display: inline-flex;
+						
+						button {
+							display: inline-block;
+							appearance: none;
+							height: 2rem;
+							padding: 0 0.8rem;
+							border: 0;
+							border-radius: 0;
+							background-color: oklch(50% 0 0 / 0.2);
+							cursor: pointer;
+							
+							&:first-child {
+								border-radius: 0.25rem 0 0 0.25rem;
+							}
+							&:last-child {
+								border-radius: 0 0.25rem 0.25rem 0;
+							}
+							
+							svg {
+								display: inline-block;
+								aspect-ratio: 1;
+								vertical-align: -0.15rem;
+								fill: currentColor;
+							}
+							
+							&:hover {
+								background-color: oklch(50% 0 0 / 0.4);
+							}
+							
+							&.selected {
+								background-color: var(--sl-color-text-accent);
+								color: var(--sl-color-text-invert);
+							}
+						}
+					}
+					
+					.categories {
+						position: relative;
+						height: 2rem;
+						cursor: pointer;
+						
+						select {
+							appearance: none;
+							height: 100%;
+							padding: 0 0.8rem;
+							border: 0;
+							background-color: transparent;
+							color: inherit;
+							text-overflow: ellipsis;
+							cursor: pointer;
+						}
+							
+						.icon {
+							position: absolute;
+							top: 50%;
+							transform: translateY(-50%);
+							pointer-events: none;
+						}
+						.caret {
+							inset-inline-end: 0;
+						}
+					}
+				}
+
 			}`}
 		</style>
 	</>);

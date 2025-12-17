@@ -16,6 +16,7 @@
     "@inox-tools/star-warp": "^0.5.0",
     "@preact/signals": "^2.5.1",
     "astro": "^5.6.1",
+    "classnames": "^2.5.1",
     "js-yaml": "^4.1.1",
     "preact": "^10.28.0"
   }
