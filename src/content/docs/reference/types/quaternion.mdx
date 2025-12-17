@@ -6,6 +6,8 @@ sidebar:
 ---
 
 ```slua
+quaternion.identity: quaternion -- quaternion(0, 0, 0, 1)
+
 (quaternion * quaternion): quaternion
 (quaternion / quaternion): quaternion
 (quaternion + quaternion): quaternion
@@ -18,5 +20,17 @@ quaternion.z: number
 quaternion.s: number
 
 function quaternion(x: number, y: number, z: number, s: number): quaternion
+function quaternion.create(x: number, y: number, z: number, s: number): quaternion
 function toquaternion(string: string): quaternion
+
+function quaternion:normalize(): quaternion
+function quaternion:magnitude(): number
+function quaternion:conjugate(): quaternion
+function quaternion.dot(a: quaternion, b: quaternion): number
+function quaternion:dot(b: quaternion): number
+function quaternion.slerp(a: quaternion, b: quaternion, t: number): quaternion
+function quaternion:slerp(b: quaternion, t: number): quaternion
+function quaternion:tofwd(): vector
+function quaternion:toleft(): vector
+function quaternion:toup(): vector
 ```
