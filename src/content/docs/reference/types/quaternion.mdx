@@ -16,6 +16,8 @@ quaternion.identity: quaternion -- quaternion(0, 0, 0, 1)
 
 (quaternion * quaternion): quaternion
 (quaternion / quaternion): quaternion
+(vector * quaternion): vector -- rotate vector by quaternion
+(vector / quaternion): vector -- rotate vector by inverse of quaternion
 (quaternion + quaternion): quaternion
 (quaternion - quaternion): quaternion
 -quaternion: quaternion
