@@ -12,25 +12,30 @@ Last checked: _Luau 2025-12-04.19944688578_
 :::
 
 ```slua
+-- Constants
 quaternion.identity: quaternion -- quaternion(0, 0, 0, 1)
 
-(quaternion * quaternion): quaternion
-(quaternion / quaternion): quaternion
-(vector * quaternion): vector -- rotate vector by quaternion
-(vector / quaternion): vector -- rotate vector by inverse of quaternion
-(quaternion + quaternion): quaternion
-(quaternion - quaternion): quaternion
+-- Operators
+quaternion * quaternion: quaternion
+quaternion / quaternion: quaternion
+vector * quaternion: vector -- rotate vector by quaternion
+vector / quaternion: vector -- rotate vector by inverse of quaternion
+quaternion + quaternion: quaternion
+quaternion - quaternion: quaternion
 -quaternion: quaternion
 
+-- Component Access
 quaternion.x: number
 quaternion.y: number
 quaternion.z: number
 quaternion.s: number
 
+-- Constructors and Conversion
 function quaternion(x: number, y: number, z: number, s: number): quaternion
 function quaternion.create(x: number, y: number, z: number, s: number): quaternion
 function toquaternion(string: string): quaternion
 
+-- Methods
 function quaternion:normalize(): quaternion
 function quaternion:magnitude(): number
 function quaternion:conjugate(): quaternion

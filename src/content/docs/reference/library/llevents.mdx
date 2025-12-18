@@ -14,6 +14,60 @@ function LLEvents:listeners(eventName: string): {[string]: {function}}
 ```
 
 ```slua
-function LLEvents.listen(channel: number, name: string, id: uuid, message: string)
 function LLEvents.touch_start(events: {DetectedEvent})
+function LLEvents.touch(events: {DetectedEvent})
+function LLEvents.touch_end(events: {DetectedEvent})
+
+function LLEvents.control(avatar: uuid, levels: number, edges: number)
+function LLEvents.game_control(avatar: uuid, buttons: number, axes: {number, number, number, number, number, number})
+
+function LLEvents.run_time_permissions(permissionFlags: number)
+function LLEvents.experience_permissions(agent_id: uuid)
+function LLEvents.experience_permissions_denied(agent_id: uuid, reason: number)
+
+function LLEvents.on_damage(events: {DetectedEvent})
+function LLEvents.final_damage(events: {DetectedEvent})
+function LLEvents.on_death()
+
+function LLEvents.attach(avatar: uuid)
+function LLEvents.on_rez(startParameter: number)
+function LLEvents.object_rez(rezzedObject: uuid)
+
+function LLEvents.changed(changed: number)
+
+function LLEvents.dataserver(request: uuid, data: string)
+function LLEvents.email(time: string, address: string, subject: string, body: string, remaining: number)
+
+function LLEvents.http_request(request: uuid, method: string, body: string)
+function LLEvents.http_response(request: uuid, status: number, metadata: {}, body: string)
+
+function LLEvents.listen(channel: number, name: string, id: uuid, message: string)
+
+function LLEvents.link_message(link: number, value: number, text: string, identifier: uuid | string)
+function LLEvents.linkset_data(action: number, name: string, value: string)
+
+function LLEvents.sensor(events: {DetectedEvent})
+function LLEvents.no_sensor()
+
+function LLEvents.at_target(target: number, targetPosition: vector, currentPosition: vector)
+function LLEvents.not_at_target()
+
+function LLEvents.at_rot_target(target: number, targetRotation: quaternion, currentRotation: quaternion)
+function LLEvents.not_at_rot_target()
+
+function LLEvents.collision_start(events: {DetectedEvent})
+function LLEvents.collision(events: {DetectedEvent})
+function LLEvents.collision_end(events: {DetectedEvent})
+
+function LLEvents.land_collision_start(position: vector)
+function LLEvents.land_collision(position: vector)
+function LLEvents.land_collision_end(position: vector)
+
+function LLEvents.moving_end()
+function LLEvents.moving_start()
+
+function LLEvents.path_update(type: number, reserved: table)
+
+function LLEvents.money(payer: uuid, amount: number)
+function LLEvents.transaction_result(request: uuid, success: number, message: string)
 ```

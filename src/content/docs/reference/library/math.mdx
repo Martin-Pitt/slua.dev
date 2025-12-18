@@ -7,9 +7,11 @@ sidebar:
 
 {/* Note: sorted/grouped based on everyday usage and related functionality */}
 ```slua
+-- Constants
 math.pi: number -- 3.14159265358979323846
 math.huge: number -- 2^1024
 
+-- Basic Functions
 function math.abs(n: number): number
 function math.floor(n: number): number
 function math.ceil(n: number): number
@@ -19,16 +21,19 @@ function math.min(list: ...number): number
 function math.max(list: ...number): number
 function math.clamp(n: number, min: number, max: number): number
 
+-- Angle Conversion and Interpolation
 function math.deg(n: number): number
 function math.rad(n: number): number
 function math.lerp(a: number, b: number, t: number): number
 function math.map(x: number, inmin: number, inmax: number, outmin: number, outmax: number): number
 
+-- Random Numbers and Perlin Noise
 function math.random(): number
 function math.random(n: number): number
 function math.random(min: number, max: number): number
 function math.noise(x: number, y: number?, z: number?): number
 
+-- Trigonometric Functions
 function math.sqrt(n: number): number
 function math.cos(n: number): number
 function math.sin(n: number): number
@@ -41,6 +46,7 @@ function math.asin(n: number): number
 function math.atan2(y: number, x: number): number
 function math.atan(n: number): number
 
+-- Advanced Functions
 function math.modf(n: number): (number, number)
 function math.fmod(x: number, y: number): number
 function math.frexp(n: number): (number, number)

@@ -6,6 +6,11 @@ sidebar:
 ---
 
 ```slua
+-- Access
+uuid.istruthy: boolean
+uuid.bytes: string
+
+-- Constructors and Conversion
 function uuid(key: string | buffer | uuid): uuid
 function uuid.create(key: string | buffer | uuid): uuid
 function touuid(key: string | buffer | uuid): uuid

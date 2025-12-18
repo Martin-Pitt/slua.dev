@@ -8,15 +8,17 @@ sidebar:
 `number`s are double-precision (64-bit) floating-point numbers.
 
 ```slua
-(number + number): number
-(number - number): number
-(number * number): number
-(number / number): number
-(number // number): number -- floor division
-(number ^ number): number -- exponentiation
-(number % number): number -- modulus
+-- Operators
+number + number: number
+number - number: number
+number * number: number
+number / number: number
+number // number: number -- floor division
+number ^ number: number -- exponentiation
+number % number: number -- modulus
 -number: number
 
+-- Assignment Operators
 number += number
 number -= number
 number *= number
@@ -25,6 +27,7 @@ number //= number
 number ^= number
 number %= number
 
+-- Comparison Operators
 number < number: boolean
 number <= number: boolean
 number > number: boolean
@@ -32,5 +35,6 @@ number >= number: boolean
 number == number: boolean
 number ~= number: boolean
 
+-- Related
 function tonumber(s: string, base: number?): number?
 ```
