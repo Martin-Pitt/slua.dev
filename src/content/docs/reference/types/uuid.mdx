@@ -6,7 +6,7 @@ sidebar:
 ---
 
 ```slua
-function uuid(key: string): uuid
-function uuid.create(key: string): uuid
-function touuid(key: string): uuid
+function uuid(key: string | buffer | uuid): uuid
+function uuid.create(key: string | buffer | uuid): uuid
+function touuid(key: string | buffer | uuid): uuid
 ```
