@@ -20,7 +20,10 @@ export default defineConfig({
         //     light: './src/assets/logo.light.svg',
         //     dark: './src/assets/logo.dark.svg',
         // },
-        social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' }],
+        social: [
+            { icon: 'discord', label: 'Discord', href: 'https://discord.gg/NTu8eGKpeQ' },
+            { icon: 'github', label: 'GitHub', href: 'https://github.com/Martin-Pitt/slua.dev' },
+        ],
         tableOfContents: false,
         pagination: false,
         defaultLocale: 'root',
