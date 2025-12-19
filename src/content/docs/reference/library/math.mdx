@@ -57,6 +57,10 @@ function math.log10(n: number): number
 function math.log(n: number, base: number?): number
 ```
 
+:::tip[Fastcall Mechanism]
+The math functions benefit from specialized builtin function calls from [Luau's fastcall mechanism](https://luau.org/performance#specialized-builtin-function-calls). However this mechanism does not work for indirect function calls.
+:::
+
 ## Removed
 ```slua
 function math.randomseed(seed: number)
