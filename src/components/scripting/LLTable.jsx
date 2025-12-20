@@ -83,6 +83,7 @@ export default function LLTable() {
 				if(!definition) return false; // Doesn't exist in LSL?
 				if(definition.private) return false; // Do not include in documentation
 				if(definition.deprecated) return false; // Do not include deprecated functions
+				if(definition['god-mode']) return false; // Not available to residents
 				return true;
 			})
 			.map(([name, categories]) => ({ name, categories }));
