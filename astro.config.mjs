@@ -36,7 +36,7 @@ export default defineConfig({
             PageFrame: './src/components/starlight/PageFrame.astro',
         },
         customCss: [
-            './src/styles/custom.css',
+            './src/css/custom.css',
         ],
         sidebar: [
             { label: 'Fundamentals', collapsed: true, autogenerate: { directory: 'fundamentals' } },

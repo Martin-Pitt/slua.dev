@@ -5,6 +5,10 @@
 		--sl-sidebar-width: 17rem;
 		--sl-content-width: 60rem;
 		
+		--sl-color-accent-low: hsl(224, 54%, 20%);
+		--sl-color-accent: hsl(224, 100%, 60%);
+		--sl-color-accent-high: hsl(224, 100%, 85%);
+		
 		/* Major Second --- Minor Third */
 		--sl-text-6xl: 4rem;
 		--sl-text-5xl: clamp(2.027rem, 1em + 2.4vw, 2.986rem);
