@@ -5,6 +5,7 @@ import preact from '@astrojs/preact';
 import { readFile } from 'fs/promises';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import starWarp from '@inox-tools/star-warp';
+import starlightContextualMenu from 'starlight-contextual-menu';
 
 
 
@@ -70,6 +71,9 @@ export default defineConfig({
         },
         plugins: [
             starWarp(),
+            starlightContextualMenu({
+                actions: ['copy', 'view', 'chatgpt', 'claude']
+            }),
         ],
     }), preact()],
 });

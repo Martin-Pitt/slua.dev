@@ -14,6 +14,7 @@
         "classnames": "^2.5.1",
         "js-yaml": "^4.1.1",
         "preact": "^10.28.0",
+        "starlight-contextual-menu": "^0.1.5",
       },
     },
   },
@@ -901,6 +902,10 @@
     "space-separated-tokens": ["space-separated-tokens@2.0.2", "", {}, "sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q=="],
 
     "stack-trace": ["stack-trace@1.0.0-pre2", "", {}, "sha512-2ztBJRek8IVofG9DBJqdy2N5kulaacX30Nz7xmkYF6ale9WBVmIy6mFBchvGX7Vx/MyjBhx+Rcxqrj+dbOnQ6A=="],
+
+    "starlight-contextual-menu": ["starlight-contextual-menu@0.1.5", "", { "peerDependencies": { "astro": "^5.0.0", "starlight-markdown": "^0.1.5" } }, "sha512-MYQ6eFDIBBnKrEh3XqR7RZ6YDJ641ADmrSjj93d+cVJGPvrCHrd6VYiKeehhczsrn6GqjaCCFAn4xUd69gcfcQ=="],
+
+    "starlight-markdown": ["starlight-markdown@0.1.5", "", { "peerDependencies": { "astro": "^5.0.0" } }, "sha512-23LXRaZp7pyE+r/HP6rxHfwic8HfvUBT4EImECA6encs/eTtrF0Z+7svANofdtfbiNt31D5q26i03B6FtcSmGg=="],
 
     "stream-replace-string": ["stream-replace-string@2.0.0", "", {}, "sha512-TlnjJ1C0QrmxRNrON00JvaFFlNh5TTG00APw23j74ET7gkQpTASi6/L2fuiav8pzK715HXtUeClpBTw2NPSn6w=="],
 

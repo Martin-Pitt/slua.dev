@@ -48,4 +48,8 @@
 			transform: translateY(-5%);
 		}
 	}
+	
+	.contextual-menu-container {
+		margin-top: auto;
+	}
 }
