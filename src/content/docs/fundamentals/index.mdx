@@ -37,7 +37,19 @@ If you want to use an external editor, then you can use [VS Code](https://code.v
 9. Edit in VS Code with full preprocessing support
 10. Save to sync changes back to the viewer
 
+:::danger[Folder Assocation Bug]
+Name-based folder association is currently broken in the latest Second Life VS Code plugin (v1.0.3 currently).
 
+This means that if you open a script from a folder that is not the root of your workspace, then the plugin will not be able to find the equivalent file in your workspace.
+
+See the github issue: [sl-vscode-plugin/issues/49](https://github.com/secondlife/sl-vscode-plugin/issues/49)
+
+Workarounds are to to drop down to v1.0.2 or to use the new `--@file` syntax to specify the path inside the files:
+1. Enable the `--@file` directive syntax in the plugin settings, search for `slVscodeEdit.sync.useFileMetaForMatching`
+2. Specify the directly and name file via `--@file`, for example `--@file test/foo.luau`
+    - You need to add the `--@file` line at the top of the file in both the in-world script and the VS Code file
+3. Now when you open the script via `Edit...` in the viewer it should open the correct file in VS Code and sync the files
+:::
 
 
 
