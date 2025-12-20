@@ -95,7 +95,7 @@ export default function LLTable() {
 	const { items, duplicateItems, removedItems } = useMemo(() => {
 		const searchTerm = search.value.toLowerCase();
 		const categoryItems = selectedCategory.value? fullItems.filter(({ categories }) => categories.includes(selectedCategory.value)) : fullItems;
-		const items = searchTerm? categoryItems.filter(({ name, categories }) => {
+		const searchedItems = searchTerm? categoryItems.filter(({ name, categories }) => {
 			if(name.toLowerCase().includes(searchTerm)) return true;
 			for(const category of categories) {
 				if(category.toLowerCase().includes(searchTerm)) return true;
@@ -105,11 +105,13 @@ export default function LLTable() {
 			return false;
 		}) : categoryItems;
 		
+		const items = [];
 		const removedItems = [];
 		const duplicateItems = [];
-		for(const item of items) {
+		for(const item of searchedItems) {
 			if(RemovedFunctions[item.name]) removedItems.push(item);
 			else if(DuplicateFunctions[item.name]) duplicateItems.push(item);
+			else items.push(item);
 		}
 		
 		return { items, duplicateItems, removedItems };
