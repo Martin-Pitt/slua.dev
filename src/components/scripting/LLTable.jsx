@@ -79,8 +79,8 @@ export default function LLTable() {
 	const { fullItems, categories, translations } = useMemo(() => {
 		const fullItems = Object.entries(ll_categories)
 			.filter(([name, _]) => {
-				const definition = lsl_definitions.functions[name];
-				if(!definition) return true; // Doesn't exist in LSL?
+				const definition = lsl_definitions.functions['ll' + name];
+				if(!definition) return false; // Doesn't exist in LSL?
 				if(definition.private) return false; // Do not include in documentation
 				if(definition.deprecated) return false; // Do not include deprecated functions
 				return true;
