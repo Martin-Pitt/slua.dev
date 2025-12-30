@@ -5,11 +5,43 @@ sidebar:
     order: 7
 ---
 
-:::caution[Stub]
-This documentation page is a stub and is currently under development.
+```slua
+-- Manipulation
+function table.create<V>(n: number, v: V?): {V}
+function table.insert<V>(t: {V}, v: V)
+function table.insert<V>(t: {V}, i: number, v: V)
+function table.remove<V>(t: {V}, i: number?): V?
+function table.move<V>(a: {V}, f: number, t: number, d: number, tt: {V}?)
+function table.clear(t: table)
+
+-- Conversion
+function table.pack<V>(args: ...V): { [number]: V, n: number }
+function table.unpack<V>(a: {V}, f: number?, t: number?): ...V
+function table.concat(a: {string}, sep: string?, f: number?, t: number?): string
+
+-- Query
+function table.find<V>(t: {V}, v: V, init: number?): number?
+function table.sort<V>(t: {V}, f: ((V, V) -> boolean)?)
+
+-- Additional Utilities
+function table.maxn<V>(t: {V}): number
+function table.freeze(t: table): table
+function table.isfrozen(t: table): boolean
+function table.clone(t: table): table
+function table.shrink(t: table, reorder: boolean?): table
+```
+
+:::note[Tip]
+Methods that start with a table argument can also be called using the colon syntax on table literals or table variables:
+```slua
+local tbl = {1, 2, 3, 200}
+local result = tbl:clone():shrink(true):freeze()
+-- result is now a frozen, shrunk clone of tbl
+```
 :::
 
-## Arrays
+
+## Array-like Tables
 Tables can be used as arrays:
 ```slua
 local example = {1,2,3,4}
@@ -22,8 +54,9 @@ for index, value in example do
 end
 ```
 
-## Dictionary
-Tables can be used as dictionaries / maps:
+
+## Dictionary-like Tables
+Tables can be used as dictionaries/maps:
 ```slua
 local example = {key1 = "value1", key2 = "value2"}
 ```
@@ -36,5 +69,12 @@ end
 ```
 
 
-
-
+## Deprecated
+```slua
+function table.foreach<K, V, R>(t: { [K]: V }, f: (K, V) -> R?): R?
+function table.foreachi<V, R>(t: {V}, f: (number, V) -> R?): R?
+function table.getn<V>(t: {V}): number
+```
+:::danger
+The above functions are deprecated and should not be used
+:::

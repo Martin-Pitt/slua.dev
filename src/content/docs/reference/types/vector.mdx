@@ -10,30 +10,37 @@ sidebar:
 vector.zero: vector -- vector(0, 0, 0)
 vector.one: vector -- vector(1, 1, 1)
 
-(vector * vector): number -- dot-product
-(vector % vector): vector -- cross-product
+(vector + vector): vector
+(vector - vector): vector
+(vector * vector): number -- Multiplies each component pair, e.g. <a.x * b.x, a.y * b.y, a.z * b.z>
+(vector / number): vector -- Divides each component pair, e.g. <a.x / b.x, a.y / b.y, a.z / b.z>
 (vector * quaternion): vector -- rotate vector by quaternion
 (vector / quaternion): vector -- rotate vector by inverse of quaternion
-(vector / number): vector
 
 (vector).x: number
 (vector).y: number
 (vector).z: number
 
+-- Constructors and Conversion
 function vector(x: number, y: number, z: number): vector
 function vector.create(x: number, y: number, z: number): vector
 function tovector(string: string): vector
 
+-- Vector Operations
 function vector.magnitude(vec: vector): number
 function vector.normalize(vec: vector): vector
 function vector.cross(vec1: vector, vec2: vector): vector
 function vector.dot(vec1: vector, vec2: vector): number
 function vector.angle(vec1: vector, vec2: vector, axis: vector?): number
+function vector.lerp(a: vector, b: vector, t: number): vector
 
+-- Component-wise Operations
 function vector.abs(vec: vector): vector
 function vector.floor(vec: vector): vector
 function vector.ceil(vec: vector): vector
 function vector.sign(vec: vector): vector
+
+-- Min/Max/Clamp
 function vector.min(...: vector): vector
 function vector.max(...: vector): vector
 function vector.clamp(vec: vector, min: vector, max: vector): vector

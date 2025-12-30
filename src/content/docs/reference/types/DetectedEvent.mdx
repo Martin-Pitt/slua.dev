@@ -4,24 +4,35 @@ description: DetectedEvent reference
 sidebar:
     order: 100
 ---
-
+ 
 ```slua
-function DetectedEvent.getOwner(): uuid
-function DetectedEvent.getName(): string
+-- Info about the detected object
 function DetectedEvent.getKey(): uuid
-function DetectedEvent.getTouchFace(): vector
-function DetectedEvent.getLinkNumber(): number
-function DetectedEvent.getGrab(): vector
+function DetectedEvent.getName(): string
+function DetectedEvent.getOwner(): uuid
 function DetectedEvent.getGroup(): boolean
+function DetectedEvent.getType(): number
+function DetectedEvent.getRezzer(): uuid
+
+-- Physical properties of the detected object
 function DetectedEvent.getPos(): vector
 function DetectedEvent.getRot(): quaternion
+function DetectedEvent.getVel(): vector
+
+-- Link the event is associated with
+function DetectedEvent.getLinkNumber(): number
+
+-- Touch specific properties
+function DetectedEvent.getTouchFace(): vector
 function DetectedEvent.getTouchBinormal(): vector
 function DetectedEvent.getTouchNormal(): vector
 function DetectedEvent.getTouchPos(): vector
 function DetectedEvent.getTouchST(): vector
 function DetectedEvent.getTouchUV(): vector
-function DetectedEvent.getType(): number
-function DetectedEvent.getVel(): vector
-function DetectedEvent.getRezzer(): uuid
+
+-- Grab specific properties
+function DetectedEvent.getGrab(): vector
+
+-- Damage specific properties
 function DetectedEvent.getDamage(): {number, number, number} -- {damage, type, original}
 ```

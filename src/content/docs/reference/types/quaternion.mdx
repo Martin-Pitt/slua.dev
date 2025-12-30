@@ -36,14 +36,23 @@ function quaternion.create(x: number, y: number, z: number, s: number): quaterni
 function toquaternion(string: string): quaternion
 
 -- Methods
-function quaternion:normalize(): quaternion
-function quaternion:magnitude(): number
-function quaternion:conjugate(): quaternion
+function quaternion.normalize(q: quaternion): quaternion
+function quaternion.magnitude(q: quaternion): number
+function quaternion.conjugate(q: quaternion): quaternion
 function quaternion.dot(a: quaternion, b: quaternion): number
-function quaternion:dot(b: quaternion): number
 function quaternion.slerp(a: quaternion, b: quaternion, t: number): quaternion
-function quaternion:slerp(b: quaternion, t: number): quaternion
-function quaternion:tofwd(): vector
-function quaternion:toleft(): vector
-function quaternion:toup(): vector
+function quaternion.tofwd(q: quaternion): vector
+function quaternion.toleft(q: quaternion): vector
+function quaternion.toup(q: quaternion): vector
 ```
+
+:::note[Tip]
+Methods that start with a quaternion argument can also be called using the colon syntax on quaternion literals or quaternion variables:
+```slua
+local quat = quaternion(0, 0, 0, 1)
+local normalized = quat:normalize()
+
+-- example with chaining methods
+local rotatedVector = vector(1, 0, 0) / quat:normalize():slerp(quaternion.identity, 0.5)
+```
+:::

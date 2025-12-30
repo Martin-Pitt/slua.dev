@@ -12,34 +12,55 @@ sidebar:
 string .. string: string
 string ..= string
 
+-- Conversion
+function tostring(obj: any): string
+
 -- Methods
-function string:sub(f: number, t: number?): string
-function string:lower(): string
-function string:upper(): string
-function string:rep(n: number): string
-function string:reverse(): string
-function string:len(): number -- equivalent to #s
+function string.sub(s: string, f: number, t: number?): string
+function string.lower(s: string): string
+function string.upper(s: string): string
+function string.rep(s: string, n: number): string
+function string.reverse(s: string): string
+function string.len(s: string): number -- equivalent to #s
 
-function string:split(sep: string?): {string}
-function string:match(p: string, init: number?): ...string?
-function string:find(p: string, init: number?, plain: boolean?): (number?, number?, ...string)
-function string:format(args: ...any): string
-function string:gmatch(p: string): <iterator>
-function string:gsub(p: string, f: function | table | string, maxs: number?): (string, number)
+function string.split(s: string, sep: string?): {string}
+function string.match(s: string, p: string, init: number?): ...string?
+function string.find(s: string, p: string, init: number?, plain: boolean?): (number?, number?, ...string)
+function string.format(s: string, args: ...any): string
+function string.gmatch(s: string, p: string): <iterator>
+function string.gsub(s: string, p: string, f: function | table | string, maxs: number?): (string, number)
 
-function string:byte(f: number?, t: number?): ...number
-function string:pack(args: ...any): string
-function string:unpack(s: string): ...any
+function string.byte(s: string, f: number?, t: number?): ...number
+function string.char(args: ...number): string
+function string.pack(f: string, args: ...any): string
+function string.unpack(f: string, s: string): ...any
 ```
 
+:::note[Tip]
+Methods that start with a string argument can also be called using the colon syntax on string literals or string variables:
+```slua
+local str = "example"
+local result = str:lower():split("a")
+-- result is now {"ex", "mple"}
+```
+:::
+
+
 ## Usage
+Example of `string.split`:
+```slua
+local str = "test string"
+local parts = string.split(str, "t")
+```
+
 Variable:
 ```slua
 local str = "test string"
-local parts: {string} = str:split("t")
+local parts = str:split("t")
 ```
 
 With a literal string:
 ```slua
-local parts: {string} = ("literal"):split("t")
+local parts = ("literal"):split("t")
 ```
+
