@@ -5,12 +5,20 @@ sidebar:
     order: 5
 ---
 
+import Attribution from '@components/Attribution.astro'
+
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
 -- Operators
 #string: number -- string length
 string .. string: string
 string ..= string
+
+-- Comparison Operators (Lexicographical order based on each ASCII byte, e.g. 'A' < 'a', '420' < '69', etc.)
+string < string: boolean
+string <= string: boolean
+string > string: boolean
+string >= string: boolean
 
 -- Conversion
 function tostring(obj: any): string
@@ -64,3 +72,278 @@ With a literal string:
 local parts = ("literal"):split("t")
 ```
 
+## Literal Strings
+
+Strings can be defined with pairs of single quotes `'`, double quotes `"`, backticks `` ` `` or multiline square brackets `[[` and `]]`:
+
+```slua
+local single = 'single quoted string'
+local double = "double quoted string"
+local interpolated = `This string can have {variables} and expressions like {1 + 2}.`
+local multiline = [[
+This is a multiline
+string.
+]]
+local escaped = "This string contains a newline:\nAnd a tab:\tEnd of string."
+```
+
+Additionally multiline strings can be defined with an arbitrary number of equal signs `=` between the square brackets, this allows you to use `[[` and `]]` inside the string without ending it:
+```slua
+local nested = [=[This is a [[nested]] multiline string.]=]
+```
+
+
+## Concatenation
+
+You can concatenate strings using the `..` operator:
+```slua
+local greeting = "Hello, " .. "world!"
+```
+Or use the `..=` operator to append directly to a variable:
+```slua
+local greeting = "Hello, "
+greeting ..= "world!"
+```
+
+
+## Escaping
+
+If you are using single or double quotes to define a string and want to embed the same quote character inside the string you can escape it with a backslash `\`:
+```slua
+local quote = "Foo said, \"Hello!\""
+```
+
+
+## Pattern Matching
+
+The most powerful functions in the string library are those that support *pattern* matching:
+- `string.find` (Finds position of substring that matches pattern)
+- `string.gsub` (Substitution of all matched substrings)
+- `string.match` (Find a matched substring)
+- `string.gmatch` (Iterate over multiple matches)
+
+:::caution
+Note that *Patterns* are different from *POSIX regular expressions*; Treat this as a different syntax.
+:::
+
+They are just regular strings but inside functions that support patterns, certain characters have special meanings.
+
+Patterns are composed of ordinary characters (which represent themselves) and magic characters `. % ( ) + - * ? [ ^ $` which have special meaning:
+- `.` (dot) matches any character
+- `%` (percent) is used to either:
+	- escape magic characters or
+	- to represent **character classes**
+- `(` and `)` are used to mark the start and end of *captures*
+- `+`, `-`, `*`, and `?` are used to specify repetition:	
+	- `+` 1 or more repetitions
+	- `*` 0 or more repetitions
+	- `-` also 0 or more repetitions (non-greedy)
+	- `?` optional (0 or 1 occurrence)
+- `[` and `]` are used to define *sets* of characters
+	- `^` (caret) when used as the first character inside a set negates the set
+	- character ranges can be specified with `-`, e.g. `[a-z]`
+	- character classes can be used inside sets, e.g. `[%a%d]` (all letters and digits)
+- `^` matches the beginning of the string
+- `$` matches the end of the string
+
+
+### Character Classes
+
+A character class represents a set of characters. Here are all the ones available:
+<table>
+	<thead>
+		<th>Class</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr><td>`%a`</td><td>all letters</td></tr>
+		<tr><td>`%d`</td><td>all digits</td></tr>
+		<tr><td>`%l`</td><td>lowercase letters</td></tr>
+		<tr><td>`%u`</td><td>uppercase letters</td></tr>
+		<tr><td>`%w`</td><td>alphanumeric characters</td></tr>
+		<tr><td>`%x`</td><td>hexadecimal digits</td></tr>
+		<tr><td>`%g`</td><td>all printable characters except space</td></tr>
+		<tr><td>`%p`</td><td>punctuation</td></tr>
+		<tr><td>`%s`</td><td>whitespace</td></tr>
+		<tr><td>`%c`</td><td>control characters</td></tr>
+		<tr><td>`%z`</td><td>NULL character</td></tr>
+	</tbody>
+</table>
+
+Note that for all classes represented by a single letter (like `%a`, `%c`, etc), the uppercase version represents the opposite. For example `%A` represents all non-letter characters, `%S` represents all non-space characters, etc.
+
+
+### Repetition
+
+The `+` modifier matches 1 or more repetitions of the previous class or character. It will always get the longest possible match (greedy): For instance, the pattern `a+` applied to the string `aaab` will match `aaa`. Or another is the pattern `%a+` (using the `%a` character class from above) which means one or more of all letters which can be used to match words:
+```slua
+print(string.gsub("one, and two; and three", "%a+", "word"))
+      --> word, word word; word word
+```
+
+The pattern `%d+` matches one or more digits (an integer):
+```slua
+local i, j = string.find("the number 1298 is even", "%d+")
+print(i,j)   --> 12  15
+```
+
+---
+
+The modifier `*` matches 0 or more repetitions of the previous class or character. It is also greedy:
+```slua
+-- Need an example that can be used in both * and - to show their differences, use an example with a full sentence:
+local str = "I am happy. I am sad."
+local greedyMatch = string.match(str, "I am .*%.")
+print(greedyMatch)  --> I am happy. I am sad.
+```
+
+---
+
+Like `*`, the `-` modifier matches 0 or more repetitions of the previous class or character, but it is *non-greedy* (also called *lazy*), meaning it will match as few characters as possible:
+```slua
+local str = "I am happy. I am sad."
+local nonGreedyMatch = string.match(str, "I am .-%.")
+print(nonGreedyMatch)  --> I am happy.
+```
+
+Sometimes however there are no differences between `*` and `-`, such as when there is only one possible match, in which case both will have the same result.
+
+A useful example is when you want to match pairs of characters such as comments in code which may have multiple pairs:
+```slua
+local code = "code /* comment one */ more code /* comment two */ end"
+for comment in string.gmatch(code, "/%*.-%*/") do
+	print(comment)
+end
+	--> /* comment one */
+	--> /* comment two */
+```
+
+---
+
+The `?` modifier matches 0 or 1 occurrence of the previous class or character, which is often useful to represent something optional:
+```slua
+local str1 = "color"
+local str2 = "colour"
+print(string.match(str1, "colou?r"))  --> color
+print(string.match(str2, "colou?r"))  --> colour
+```
+```slua
+-- Pulling integers out of text with optional + or - signs
+for s in string.gmatch("Examples: -10, 20, +30", "[+-]?%d+") do
+	print(s)
+end
+	--> -10
+	--> 20
+	--> +30
+```
+
+
+### `^` and `$` Anchors
+
+If a pattern starts with `^`, it matches only at the beginning of the string. Similarly, if a pattern ends with `$`, it matches only at the end of the string.
+
+For example, to check if a string is exactly "hello":
+```slua
+local str = "hello"
+if string.match(str, "^hello$") then
+	print("The string is exactly 'hello'")
+end
+```
+
+Another:
+```slua -- example looping through multiple test strings some of which fail to demonstrate the anchors
+local testStrings = {
+	"hello",
+	"hello world",
+	"say hello",
+	"hello!"
+}
+for _, str in testStrings do
+	if string.match(str, "^hello$") then
+		print(`'{str}' matches 'hello' exactly`)
+	else
+		print(`'{str}' does not match 'hello'`)
+	end
+end
+	--> 'hello' matches 'hello' exactly
+	--> 'hello world' does not match 'hello'
+	--> 'say hello' does not match 'hello'
+	--> 'hello!' does not match 'hello'
+```
+
+
+### `[` Sets `]`
+
+Represents the union or complement of a set of characters.
+
+A range of characters can be specified by separating the end characters of the range, in ascending order, with a `-`, for example: `[a-z]`.
+
+You can use classes inside sets:
+<ul>
+	<li>`[%w_]` (or `[_%w]`) represents all *alphanumeric characters* (per `%w` above) plus the *underscore*</li>
+	<li>`[0-7]` represents the octal digits, and `[0-7%l%-]` represents the octal digits plus the lowercase letters plus the `-` character (as an escaped character)</li>
+</ul>
+
+`[^set]` represents the complement of set, inverting the logic to match any character not in the set.
+
+Alternatively, instead of escaping you are allowed to put:
+- `]` closing square bracket in a set by positioning it as the first character in the set: `[]abc]` represents the set containing `]`, `a`, `b`, and `c`
+- `-` hyphen in a set by positioning it as the first or last character in the set: `[-abc]` or `[abc-]` represents the set containing `-`, `a`, `b`, and `c`
+
+Beware that the interaction between ranges and classes is not defined. Therefore, patterns like `[%a-z]` or `[a-%%]` have no meaning.
+
+
+### `%b` Balanced Matches
+
+Another item in a pattern is the `%b`, that matches balanced strings.
+
+This is written as `%bxy`, where `x` and `y` are any two distinct characters; the `x` acts as an opening character and the `y` as the closing one.
+For instance, the pattern `%b()` matches parts of the string that start with a `(` and finish at the respective `)`:
+```slua
+print(string.gsub("a (enclosed (in) parentheses) line", "%b()", ""))
+      --> a  line
+```
+Typically, this pattern is used as `%b()`, `%b[]`, `%b%{%}`, or `%b<>`, but you can use any characters as delimiters.
+
+
+### `%f` Frontier Pattern
+
+The pattern `%f[set]` represents a *frontier*; it matches an empty string at any position such that the next character belongs to *set* and the previous character does not belong to *set*.
+
+For instance, the pattern `%f[%a]` matches the beginning of each word in a string (where a word is defined as a sequence of letters):
+```slua
+local str = "hello world! 123 go."
+for word in string.gmatch(str, "%f[%a]%a+") do
+	print(word)
+end
+	--> hello
+	--> world
+	--> go
+```
+
+Other usecases are:
+```slua
+-- Finding numbers only (not part of words)
+local str = "item1 costs 50 dollars, item2 costs100dollars"
+for num in string.gmatch(str, "%f[%d]%d+") do
+	print(num)
+end
+	--> 50
+
+-- Finding values with units (with capture groups to separate value and unit)
+local str = "length:20cm width:1m border:30px"
+for value, unit in string.gmatch(str, "%f[%d](%d+)(cm|m|px)") do
+	print(`Value: {value}, Unit: {unit}`)
+end
+	--> Value: 20, Unit: cm
+	--> Value: 1, Unit: m
+	--> Value: 30, Unit: px
+```
+
+
+<Attribution
+	title="Lua 5.3 Reference Manual"
+	source="https://www.lua.org/manual/5.3/manual.html"
+	author="2015–2020 Lua.org, PUC-Rio"
+	license="MIT"
+/>
