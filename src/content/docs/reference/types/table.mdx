@@ -6,29 +6,29 @@ sidebar:
 ---
 
 ```slua
--- Manipulation
-function table.create<V>(n: number, v: V?): {V}
-function table.insert<V>(t: {V}, v: V)
-function table.insert<V>(t: {V}, i: number, v: V)
-function table.remove<V>(t: {V}, i: number?): V?
-function table.move<V>(a: {V}, f: number, t: number, d: number, tt: {V}?)
-function table.clear(t: table)
+-- Creation and Manipulation
+function table.create(n: number, value: any?): {any}
+function table.insert(list: {any}, value: any)
+function table.insert(list: {any}, position: number, value: any)
+function table.remove(list: {any}, position: number?): any?
+function table.move(source: {any}, sourceFrom: number, sourceTo: number, destPosition: number, destination: {any}?)
+function table.clear(table: {any})
 
 -- Conversion
-function table.pack<V>(args: ...V): { [number]: V, n: number }
-function table.unpack<V>(a: {V}, f: number?, t: number?): ...V
-function table.concat(a: {string}, sep: string?, f: number?, t: number?): string
+function table.pack(...: any): { [number]: any, n: number }
+function table.unpack(list: {any}, from: number?, to: number?): ...any
+function table.concat(list: {string}, separator: string?, from: number?, to: number?): string
 
 -- Query
-function table.find<V>(t: {V}, v: V, init: number?): number?
-function table.sort<V>(t: {V}, f: ((V, V) -> boolean)?)
+function table.find(table: {any}, value: any, start: number?): number?
+function table.sort(list: {any}, comparison: ((a: any, b: any) -> boolean)?)
 
 -- Additional Utilities
-function table.maxn<V>(t: {V}): number
-function table.freeze(t: table): table
-function table.isfrozen(t: table): boolean
-function table.clone(t: table): table
-function table.shrink(t: table, reorder: boolean?): table
+function table.maxn(list: {any}): number
+function table.freeze(table: table): table
+function table.isfrozen(table: table): boolean
+function table.clone(table: table): table
+function table.shrink(table: table, reorder: boolean?): table
 ```
 
 :::note[Tip]

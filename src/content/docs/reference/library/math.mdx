@@ -25,7 +25,7 @@ function math.clamp(n: number, min: number, max: number): number
 function math.deg(n: number): number
 function math.rad(n: number): number
 function math.lerp(a: number, b: number, t: number): number
-function math.map(x: number, inmin: number, inmax: number, outmin: number, outmax: number): number
+function math.map(x: number, inMin: number, inMax: number, outMin: number, outMax: number): number
 
 -- Random Numbers and Perlin Noise
 function math.random(): number
@@ -45,6 +45,11 @@ function math.acos(n: number): number
 function math.asin(n: number): number
 function math.atan2(y: number, x: number): number
 function math.atan(n: number): number
+
+-- Classification
+function math.isnan(n: number): boolean
+function math.isinf(n: number): boolean
+function math.isfinite(n: number): boolean
 
 -- Advanced Functions
 function math.modf(n: number): (number, number)

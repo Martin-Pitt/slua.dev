@@ -31,17 +31,25 @@ function string.rep(s: string, n: number): string
 function string.reverse(s: string): string
 function string.len(s: string): number -- equivalent to #s
 
-function string.split(s: string, sep: string?): {string}
-function string.match(s: string, p: string, init: number?): ...string?
-function string.find(s: string, p: string, init: number?, plain: boolean?): (number?, number?, ...string)
-function string.format(s: string, args: ...any): string
-function string.gmatch(s: string, p: string): <iterator>
-function string.gsub(s: string, p: string, f: function | table | string, maxs: number?): (string, number)
+-- Splitting
+function string.split(s: string, separator: string?): {string}
 
+-- Formatting
+function string.format(format: string, ...: any): string
+
+-- Pattern Matching
+function string.find(s: string, pattern: string, init: number?, plain: boolean?): (number?, number?, ...string)
+function string.match(s: string, pattern: string, init: number?): ...string?
+function string.gsub(s: string, pattern: string, replacement: string | table | (...string) -> string, max: number?): (string, number)
+function string.gmatch(s: string, pattern: string): <iterator>
+
+-- Byte and Character Operations
 function string.byte(s: string, f: number?, t: number?): ...number
-function string.char(args: ...number): string
-function string.pack(f: string, args: ...any): string
-function string.unpack(f: string, s: string): ...any
+function string.char(...: number): string
+
+-- Packing and Unpacking
+function string.pack(format: string, ...: any): string
+function string.unpack(format: string, s: string, pos: number?): ...any
 ```
 
 :::note[Tip]

@@ -56,3 +56,8 @@ local normalized = quat:normalize()
 local rotatedVector = vector(1, 0, 0) / quat:normalize():slerp(quaternion.identity, 0.5)
 ```
 :::
+
+
+## Rotation Alias
+
+Quaternions are also aliased as `rotation` in SLua, which includes `torotation` as an alias for `toquaternion`. This is a nomenclature holdover from LSL, although really *rotations* can be represented as a single number for 2D rotations or Euler angles for 3D as an alternative to quaternions, so the naming in LSL was always a bit of a misnomer.

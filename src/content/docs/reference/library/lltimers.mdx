@@ -6,7 +6,7 @@ sidebar:
 ---
 
 ```slua
-function LLTimers:every(seconds: number, callback: (scheduledtime: number)): function
-function LLTimers:once(seconds: number, callback: (scheduledtime: number)): function
+function LLTimers:every(seconds: number, callback: (scheduled: number, interval: number)): function
+function LLTimers:once(seconds: number, callback: (scheduled: number)): function
 function LLTimers:off(handler: function): boolean
 ```

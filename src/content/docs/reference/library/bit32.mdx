@@ -7,20 +7,24 @@ sidebar:
 
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
+-- Bitwise Operations
 function bit32.band(args: ...number): number
 function bit32.bnot(n: number): number
 function bit32.bor(args: ...number): number
 function bit32.bxor(args: ...number): number
 function bit32.btest(args: ...number): boolean
 
-function bit32.extract(n: number, f: number, w: number?): number
-function bit32.replace(n: number, r: number, f: number, w: number?): number
+-- Bit Field Operations
+function bit32.extract(n: number, field: number, width: number?): number
+function bit32.replace(n: number, replacement: number, field: number, width: number?): number
 function bit32.byteswap(n: number): number
 function bit32.countlz(n: number): number
+function bit32.countrz(n: number): number
 
-function bit32.lrotate(n: number, i: number): number
-function bit32.rrotate(n: number, i: number): number
-function bit32.lshift(n: number, i: number): number
-function bit32.rshift(n: number, i: number): number
-function bit32.arshift(n: number, i: number): number
+-- Bit Rotation and Shifting
+function bit32.lrotate(n: number, displacement: number): number
+function bit32.rrotate(n: number, displacement: number): number
+function bit32.lshift(n: number, displacement: number): number
+function bit32.rshift(n: number, displacement: number): number
+function bit32.arshift(n: number, displacement: number): number
 ```

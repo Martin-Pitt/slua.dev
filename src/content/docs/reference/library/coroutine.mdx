@@ -7,12 +7,19 @@ sidebar:
 
 {/* TODO: sorted and grouped based on related functionality */}
 ```slua
+-- Coroutine Creation
 function coroutine.create(f: function): thread
-function coroutine.running(): thread?
-function coroutine.status(co: thread): string
 function coroutine.wrap(f: function): function
-function coroutine.yield(args: ...any): ...any
-function coroutine.isyieldable(): boolean
+
+-- Coroutine Control
 function coroutine.resume(co: thread, args: ...any): (boolean, ...any)
 function coroutine.close(co: thread): (boolean, any?)
+
+-- Yielding from a Coroutine
+function coroutine.yield(args: ...any): ...any
+
+-- Coroutine Status and Information
+function coroutine.isyieldable(): boolean
+function coroutine.running(): thread?
+function coroutine.status(co: thread): "running" | "suspended" | "normal" | "dead"
 ```

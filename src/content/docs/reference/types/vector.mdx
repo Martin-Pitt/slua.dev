@@ -27,21 +27,21 @@ function vector.create(x: number, y: number, z: number): vector
 function tovector(string: string): vector
 
 -- Vector Operations
-function vector.magnitude(vec: vector): number
-function vector.normalize(vec: vector): vector
-function vector.cross(vec1: vector, vec2: vector): vector
-function vector.dot(vec1: vector, vec2: vector): number
-function vector.angle(vec1: vector, vec2: vector, axis: vector?): number
+function vector.magnitude(v: vector): number
+function vector.normalize(v: vector): vector
+function vector.cross(v1: vector, v2: vector): vector
+function vector.dot(v1: vector, v2: vector): number
+function vector.angle(v1: vector, v2: vector, axis: vector?): number
 function vector.lerp(a: vector, b: vector, t: number): vector
 
 -- Component-wise Operations
-function vector.abs(vec: vector): vector
-function vector.floor(vec: vector): vector
-function vector.ceil(vec: vector): vector
-function vector.sign(vec: vector): vector
+function vector.abs(v: vector): vector
+function vector.floor(v: vector): vector
+function vector.ceil(v: vector): vector
+function vector.sign(v: vector): vector
 
 -- Min/Max/Clamp
 function vector.min(...: vector): vector
 function vector.max(...: vector): vector
-function vector.clamp(vec: vector, min: vector, max: vector): vector
+function vector.clamp(v: vector, min: vector, max: vector): vector
 ```

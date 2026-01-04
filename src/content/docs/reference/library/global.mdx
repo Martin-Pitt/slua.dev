@@ -39,6 +39,9 @@ function xpcall(f: function, e: function, args: ...any): (boolean, ...any)
 -- Userdata Creation
 function newproxy(mt: boolean?): userdata
 
+-- Module loading for bundlers
+function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
+
 -- Raw Access
 function rawget<K, V>(t: { [K]: V }, k: K): V?
 function rawset<K, V>(t: { [K] : V }, k: K, v: V)
@@ -214,6 +217,12 @@ Returns all values of `a` with indices in `[f..t]` range. `f` defaults to 1 and 
 
 ---
 
+```slua
+function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
+```
+This is a function added in SLua that allows module bundlers to load modules, helping with scoping and isolating module code. The function passed in is isolated like a module and returns the exports of the module. However mind that you will need to cache the results to avoid re-executing the module code on each call.
+
+---
 
 <Attribution
 	title="Luau Library Documentation"

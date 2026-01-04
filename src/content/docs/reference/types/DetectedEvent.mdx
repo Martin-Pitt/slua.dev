@@ -6,6 +6,10 @@ sidebar:
 ---
  
 ```slua
+DetectedEvent.index: number
+DetectedEvent.valid: boolean
+DetectedEvent.canAdjustDamage: boolean
+
 -- Info about the detected object
 function DetectedEvent.getKey(): uuid
 function DetectedEvent.getName(): string
@@ -33,6 +37,7 @@ function DetectedEvent.getTouchUV(): vector
 -- Grab specific properties
 function DetectedEvent.getGrab(): vector
 
--- Damage specific properties
+-- Damage specific
 function DetectedEvent.getDamage(): {number, number, number} -- {damage, type, original}
+function DetectedEvent.adjustDamage(newDamage: number)
 ```
