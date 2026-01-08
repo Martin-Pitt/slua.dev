@@ -316,7 +316,7 @@ Typically, this pattern is used as `%b()`, `%b[]`, `%b%{%}`, or `%b<>`, but you 
 
 ### `%f` Frontier Pattern
 
-The pattern `%f[set]` represents a *frontier*; it matches an empty string at any position such that the next character belongs to *set* and the previous character does not belong to *set*.
+The pattern `%f[set]` represents a *frontier*; it matches an *empty string* at any position such that the next character belongs to *set* and the previous character does not belong to *set*.
 
 For instance, the pattern `%f[%a]` matches the beginning of each word in a string (where a word is defined as a sequence of letters):
 ```slua
@@ -339,8 +339,8 @@ end
 	--> 50
 
 -- Finding values with units (with capture groups to separate value and unit)
-local str = "length:20cm width:1m border:30px"
-for value, unit in string.gmatch(str, "%f[%d](%d+)(cm|m|px)") do
+local str = "length:20cm; width=1m, border 30px"
+for value, unit in string.gmatch(str, "%f[%d](%d+)(%a+)") do
 	print(`Value: {value}, Unit: {unit}`)
 end
 	--> Value: 20, Unit: cm
