@@ -56,4 +56,8 @@
 	.contextual-menu-container {
 		margin-top: auto;
 	}
+	
+	.main-pane {
+		container: article / inline-size;
+	}
 }

@@ -1,8 +1,9 @@
 ---
-title: string
-description: String library in Luau
+title: String Type
+description: Reference for string type and library in SLua
 sidebar:
     order: 5
+    label: string
 ---
 
 import Attribution from '@components/Attribution.astro'
@@ -60,6 +61,17 @@ local result = str:lower():split("a")
 -- result is now {"ex", "mple"}
 ```
 :::
+
+:::tip[Fastcall Mechanism]
+A few of the string functions can benefit from optimisation via [Luau's fastcall mechanism](https://luau.org/performance#specialized-builtin-function-calls). However the function call needs to be 'obvious' to the compiler, so avoid calling them via colon syntax or through indirect function calls.
+
+Fastcall functions in string include:
+- `string.byte`
+- `string.char`
+- `string.len`
+- `string.sub`
+:::
+
 
 
 ## Usage

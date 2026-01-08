@@ -1,25 +1,29 @@
 ---
-title: vector
-description: Vector library in Luau
+title: Vector Type
+description: Reference for vector type and library in SLua
 sidebar:
     order: 3
+    label: vector
 ---
 
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
+-- Constants
 vector.zero: vector -- vector(0, 0, 0)
 vector.one: vector -- vector(1, 1, 1)
 
-(vector + vector): vector
-(vector - vector): vector
-(vector * vector): number -- Multiplies each component pair, e.g. <a.x * b.x, a.y * b.y, a.z * b.z>
-(vector / number): vector -- Divides each component pair, e.g. <a.x / b.x, a.y / b.y, a.z / b.z>
-(vector * quaternion): vector -- rotate vector by quaternion
-(vector / quaternion): vector -- rotate vector by inverse of quaternion
+-- Operators
+vector + vector: vector
+vector - vector: vector
+vector * vector: number -- Multiplies each component pair, e.g. <a.x * b.x, a.y * b.y, a.z * b.z>
+vector / number: vector -- Divides each component pair, e.g. <a.x / b.x, a.y / b.y, a.z / b.z>
+vector * quaternion: vector -- rotate vector by quaternion
+vector / quaternion: vector -- rotate vector by inverse of quaternion
 
-(vector).x: number
-(vector).y: number
-(vector).z: number
+-- Component Access
+vector.x: number
+vector.y: number
+vector.z: number
 
 -- Constructors and Conversion
 function vector(x: number, y: number, z: number): vector
@@ -45,3 +49,17 @@ function vector.min(...: vector): vector
 function vector.max(...: vector): vector
 function vector.clamp(v: vector, min: vector, max: vector): vector
 ```
+
+:::danger[Upcoming]
+`vector.lerp` is upstream in Luau but not yet merged into SLua.
+
+Last checked: _Luau 2025-12-04.19944688578_
+
+For now you can calculate lerp manually: `a + (b - a) * t`
+:::
+
+:::tip[Fastcall Mechanism]
+The vector functions can benefit from optimisation via [Luau's fastcall mechanism](https://luau.org/performance#specialized-builtin-function-calls). However the function call needs to be 'obvious' to the compiler, so avoid calling them via colon syntax or through indirect function calls.
+
+Currently fastcall functions in `vector` include all except for `vector.angle`
+:::

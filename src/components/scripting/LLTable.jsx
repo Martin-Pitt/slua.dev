@@ -39,6 +39,7 @@ const DuplicateFunctions = {
 	'GetTimestamp': 'os.date',
 	'GetDate': 'os.date',
 	'StringLength': '#string, string.len, utf8.len',
+	'GetListLength': '#table',
 	'ToUpper': 'string.upper',
 	'ToLower': 'string.lower',
 	'VecMag': 'vector.magnitude',
