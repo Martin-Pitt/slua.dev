@@ -347,7 +347,7 @@ export default function LLTable() {
 			{`@layer components {
 				.library-view {
 					code { display: block }
-					.categorised-list { columns: 45ch }
+					.categorised-list { columns: 45ch !important }
 					
 					a {
 						display: inline-block;
@@ -369,6 +369,149 @@ export default function LLTable() {
 				}
 				
 				
+				.expressive-code {
+					font-family: var(--ec-uiFontFml);
+					font-size: var(--ec-uiFontSize);
+					font-weight: var(--ec-uiFontWg);
+					line-height: var(--ec-uiLineHt);
+					text-size-adjust: none;
+					-webkit-text-size-adjust: none;
+					
+					.frame {
+						all: unset;
+						position: relative;
+						display: block;
+						--header-border-radius: calc(var(--ec-brdRad) + var(--ec-brdWd));
+						--tab-border-radius: calc(var(--ec-frm-edTabBrdRad) + var(--ec-brdWd));
+						--button-spacing: 0.4rem;
+						--code-background: var(--ec-frm-edBg);
+						border-radius: var(--header-border-radius);
+						box-shadow: var(--ec-frm-frameBoxShdCssVal);
+						
+						pre {
+							display: flex;
+							overflow-x: auto;
+							margin: 0;
+							padding: 0;
+							border: var(--ec-brdWd) solid var(--ec-brdCol);
+							border-radius: calc(var(--ec-brdRad) + var(--ec-brdWd));
+							background: var(--code-background);
+							& > code {
+								all: unset;
+								display: block;
+								flex: 1 0 100%;
+								padding: var(--ec-codePadBlk) 0;
+								color: var(--ec-codeFg);
+								font-family: var(--ec-codeFontFml);
+								font-size: var(--ec-codeFontSize);
+								font-weight: var(--ec-codeFontWg);
+								line-height: var(--ec-codeLineHt);
+							}
+						}
+					}
+					
+					.ec-line {
+						direction: ltr;
+						unicode-bidi: isolate;
+						display: grid;
+						grid-template-areas: 'gutter code';
+						grid-template-columns: auto 1fr;
+						position: relative;
+						
+						.code {
+							grid-area: code;
+							position: relative;
+							box-sizing: content-box;
+							padding-inline-start: calc(var(--ecIndent, 0ch) + var(--ec-codePadInl) - var(--ecGtrBrdWd));
+							padding-inline-end: var(--ec-codePadInl);
+							text-indent: calc(var(--ecIndent, 0ch) * -1);
+							--ecGtrBrdWd: var(--ec-gtrBrdWd);
+						}
+					}
+				}
+					
+				:root,:root:not([data-theme='dark']) .expressive-code[data-theme='dark'] {
+					--ec-brdRad: 0px;
+					--ec-brdWd: 1px;
+					--ec-brdCol: #1b1f23;
+					--ec-codeFontFml: var(--__sl-font-mono);
+					--ec-codeFontSize: var(--sl-text-code);
+					--ec-codeFontWg: 400;
+					--ec-codeLineHt: var(--sl-line-height);
+					--ec-codePadBlk: 0.75rem;
+					--ec-codePadInl: 1rem;
+					--ec-codeBg: #24292e;
+					--ec-codeFg: #e1e4e8;
+					--ec-codeSelBg: #3392ff44;
+					--ec-gtrFg: #727980;
+					--ec-gtrBrdCol: #72798033;
+					--ec-gtrBrdWd: 1.5px;
+					--ec-gtrHlFg: #e1e4e896;
+					--ec-uiFontFml: var(--__sl-font);
+					--ec-uiFontSize: 0.9rem;
+					--ec-uiFontWg: 400;
+					--ec-uiLineHt: 1.65;
+					--ec-uiPadBlk: 0.25rem;
+					--ec-uiPadInl: 1rem;
+					--ec-uiSelBg: #39414a;
+					--ec-uiSelFg: #e1e4e8;
+					--ec-focusBrd: #005cc5;
+					--ec-sbThumbCol: #6a737d33;
+					--ec-sbThumbHoverCol: #6a737dd1;
+					--ec-tm-lineMarkerAccentMarg: 0rem;
+					--ec-tm-lineMarkerAccentWd: 0.15rem;
+					--ec-tm-lineMarkerLabelPadInl: 0.2rem;
+					--ec-tm-lineMarkerLabelCol: white;
+					--ec-tm-lineDiffIndMargLeft: 0.25rem;
+					--ec-tm-inlMarkerBrdWd: 1.5px;
+					--ec-tm-inlMarkerBrdRad: 0.2rem;
+					--ec-tm-inlMarkerPad: 0.15rem;
+					--ec-tm-insDiffIndContent: '+';
+					--ec-tm-delDiffIndContent: '-';
+					--ec-tm-markBg: #174a9099;
+					--ec-tm-markBrdCol: #4d70bcd0;
+					--ec-tm-insBg: #1e571599;
+					--ec-tm-insBrdCol: #487f3bd0;
+					--ec-tm-insDiffIndCol: #79b169d0;
+					--ec-tm-delBg: #862d2799;
+					--ec-tm-delBrdCol: #b4554bd0;
+					--ec-tm-delDiffIndCol: #ed8779d0;
+					--ec-frm-shdCol: #0000005b;
+					--ec-frm-frameBoxShdCssVal: 0.1rem 0.1rem 0.2rem #0000005b;
+					--ec-frm-edActTabBg: #24292e;
+					--ec-frm-edActTabFg: #e1e4e8;
+					--ec-frm-edActTabBrdCol: transparent;
+					--ec-frm-edActTabIndHt: 1px;
+					--ec-frm-edActTabIndTopCol: #f9826c;
+					--ec-frm-edActTabIndBtmCol: #24292e;
+					--ec-frm-edTabsMargInlStart: 0;
+					--ec-frm-edTabsMargBlkStart: 0;
+					--ec-frm-edTabBrdRad: 0px;
+					--ec-frm-edTabBarBg: #1f2428;
+					--ec-frm-edTabBarBrdCol: #1b1f23;
+					--ec-frm-edTabBarBrdBtmCol: #1b1f23;
+					--ec-frm-edBg: #24292e;
+					--ec-frm-trmTtbFg: #e1e4e8;
+					--ec-frm-trmTtbDotsFg: #e1e4e8;
+					--ec-frm-trmTtbDotsOpa: 0.15;
+					--ec-frm-trmTtbBg: #24292e;
+					--ec-frm-trmTtbBrdBtmCol: #1b1f23;
+					--ec-frm-trmBg: #1f2428;
+					--ec-frm-inlBtnFg: #e1e4e8;
+					--ec-frm-inlBtnBg: #e1e4e8;
+					--ec-frm-inlBtnBgIdleOpa: 0;
+					--ec-frm-inlBtnBgHoverOrFocusOpa: 0.2;
+					--ec-frm-inlBtnBgActOpa: 0.3;
+					--ec-frm-inlBtnBrd: #e1e4e8;
+					--ec-frm-inlBtnBrdOpa: 0.4;
+					--ec-frm-tooltipSuccessBg: #228739;
+					--ec-frm-tooltipSuccessFg: white;
+					--ec-frm-copyIcon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.75'%3E%3Cpath%20d%3D'M3%2019a2%202%200%200%201-1-2V2a2%202%200%200%201%201-1h13a2%202%200%200%201%202%201'%2F%3E%3Crect%20x%3D'6'%20y%3D'5'%20width%3D'16'%20height%3D'18'%20rx%3D'1.5'%20ry%3D'1.5'%2F%3E%3C%2Fsvg%3E");
+					--ec-frm-trmIcon: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2060%2016'%20preserveAspectRatio%3D'xMidYMid%20meet'%3E%3Ccircle%20cx%3D'8'%20cy%3D'8'%20r%3D'8'%2F%3E%3Ccircle%20cx%3D'30'%20cy%3D'8'%20r%3D'8'%2F%3E%3Ccircle%20cx%3D'52'%20cy%3D'8'%20r%3D'8'%2F%3E%3C%2Fsvg%3E");
+					--ec-lineNumbers-fg: inherit;
+					--ec-lineNumbers-hlFg: inherit
+				}
+				
 				.expressive-code .ec-line :where(span[style^='--']:not([class])),
 				:root:not([data-theme='dark']) .expressive-code[data-theme='dark'] .ec-line :where(span[style^='--']:not([class])) {
 					color: var(--0, inherit);
@@ -379,6 +522,44 @@ export default function LLTable() {
 				}
 				
 				@media (prefers-color-scheme: light) {
+					:root:not([data-theme='dark']) {
+						--ec-brdCol:#e1e4e8;
+						--ec-codeBg: #fff;
+						--ec-codeFg: #24292e;
+						--ec-codeSelBg: #0366d625;
+						--ec-gtrFg: #1b1f2381;
+						--ec-gtrBrdCol: #1b1f2333;
+						--ec-gtrHlFg: #24292eab;
+						--ec-uiSelBg: #e2e5e9;
+						--ec-uiSelFg: #2f363d;
+						--ec-focusBrd: #2188ff;
+						--ec-sbThumbCol: #959da533;
+						--ec-sbThumbHoverCol: #959da5eb;
+						--ec-tm-markBg: #9ab6ff99;
+						--ec-tm-insBg: #8ec77d99;
+						--ec-tm-insDiffIndCol: #336a28d0;
+						--ec-tm-delBg: #ff9c8e99;
+						--ec-tm-delDiffIndCol: #9d4138d0;
+						--ec-frm-shdCol: #00000028;
+						--ec-frm-frameBoxShdCssVal: 0.1rem 0.1rem 0.2rem #00000028;
+						--ec-frm-edActTabBg: #fff;
+						--ec-frm-edActTabFg: #2f363d;
+						--ec-frm-edActTabIndBtmCol: #fff;
+						--ec-frm-edTabBarBg: #f6f8fa;
+						--ec-frm-edTabBarBrdCol: #e1e4e8;
+						--ec-frm-edTabBarBrdBtmCol: #e1e4e8;
+						--ec-frm-edBg: #fff;
+						--ec-frm-trmTtbFg: #2f363d;
+						--ec-frm-trmTtbDotsFg: #2f363d;
+						--ec-frm-trmTtbBg: #fff;
+						--ec-frm-trmTtbBrdBtmCol: #e1e4e8;
+						--ec-frm-trmBg: #f6f8fa;
+						--ec-frm-inlBtnFg: #24292e;
+						--ec-frm-inlBtnBg: #24292e;
+						--ec-frm-inlBtnBrd: #24292e;
+						--ec-frm-tooltipSuccessBg: #208638
+					}
+					
 					:root:not([data-theme='dark']) .expressive-code .ec-line :where(span[style^='--']:not([class])) {
 						color: var(--1, inherit);
 						background-color: var(--1bg, transparent);
@@ -386,6 +567,44 @@ export default function LLTable() {
 						font-weight: var(--1fw, inherit);
 						text-decoration: var(--1td, inherit)
 					}
+				}
+				
+				:root[data-theme='light'] .expressive-code: not([data-theme='dark']),.expressive-code[data-theme='light'] {
+					--ec-brdCol:#e1e4e8;
+					--ec-codeBg: #fff;
+					--ec-codeFg: #24292e;
+					--ec-codeSelBg: #0366d625;
+					--ec-gtrFg: #1b1f2381;
+					--ec-gtrBrdCol: #1b1f2333;
+					--ec-gtrHlFg: #24292eab;
+					--ec-uiSelBg: #e2e5e9;
+					--ec-uiSelFg: #2f363d;
+					--ec-focusBrd: #2188ff;
+					--ec-sbThumbCol: #959da533;
+					--ec-sbThumbHoverCol: #959da5eb;
+					--ec-tm-markBg: #9ab6ff99;
+					--ec-tm-insBg: #8ec77d99;
+					--ec-tm-insDiffIndCol: #336a28d0;
+					--ec-tm-delBg: #ff9c8e99;
+					--ec-tm-delDiffIndCol: #9d4138d0;
+					--ec-frm-shdCol: #00000028;
+					--ec-frm-frameBoxShdCssVal: 0.1rem 0.1rem 0.2rem #00000028;
+					--ec-frm-edActTabBg: #fff;
+					--ec-frm-edActTabFg: #2f363d;
+					--ec-frm-edActTabIndBtmCol: #fff;
+					--ec-frm-edTabBarBg: #f6f8fa;
+					--ec-frm-edTabBarBrdCol: #e1e4e8;
+					--ec-frm-edTabBarBrdBtmCol: #e1e4e8;
+					--ec-frm-edBg: #fff;
+					--ec-frm-trmTtbFg: #2f363d;
+					--ec-frm-trmTtbDotsFg: #2f363d;
+					--ec-frm-trmTtbBg: #fff;
+					--ec-frm-trmTtbBrdBtmCol: #e1e4e8;
+					--ec-frm-trmBg: #f6f8fa;
+					--ec-frm-inlBtnFg: #24292e;
+					--ec-frm-inlBtnBg: #24292e;
+					--ec-frm-inlBtnBrd: #24292e;
+					--ec-frm-tooltipSuccessBg: #208638
 				}
 				
 				:root[data-theme='light'] .expressive-code:not([data-theme='dark']) .ec-line :where(span[style^='--']:not([class])),
