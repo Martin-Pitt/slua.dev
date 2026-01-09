@@ -35,6 +35,7 @@ export default defineConfig({
             Header: './src/components/starlight/Header.astro',
             PageFrame: './src/components/starlight/PageFrame.astro',
             EditLink: './src/components/starlight/EditLink.astro',
+            Hero: './src/components/starlight/Hero.astro',
         },
         customCss: [
             './src/css/custom.css',
