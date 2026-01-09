@@ -17,4 +17,11 @@ uuid.bytes: string
 function uuid(key: string | buffer | uuid): uuid
 function uuid.create(key: string | buffer | uuid): uuid
 function touuid(key: string | buffer | uuid): uuid
+
+-- Related ll.* UUID Functions
+function ll.GenerateKey(): uuid
+function ll.GetKey(): uuid
+function ll.GetObjectLinkKey(object: uuid, link: number): uuid
+function ll.GetOwner(): uuid
+function ll.GetOwnerKey(object: uuid): uuid
 ```

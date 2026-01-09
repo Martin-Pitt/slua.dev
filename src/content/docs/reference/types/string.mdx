@@ -51,6 +51,14 @@ function string.char(...: number): string
 -- Packing and Unpacking
 function string.pack(format: string, ...: any): string
 function string.unpack(format: string, s: string, pos: number?): ...any
+
+-- Related ll.* String Functions (UTF8 friendly)
+function ll.DeleteSubString(source: string, start: number, end: number): string
+function ll.GetSubString(string: string, start: number, end: number): string
+function ll.InsertString(target: string, position: number, source: string): string
+function ll.ReplaceSubString(initial: string, substring: string, replacement: string, count: number): string
+function ll.StringTrim(text: string, trimType: STRING_TRIM | STRING_TRIM_HEAD | STRING_TRIM_TAIL): string
+function ll.SubStringIndex(text: string, sequence: string): number
 ```
 
 :::note[Tip]

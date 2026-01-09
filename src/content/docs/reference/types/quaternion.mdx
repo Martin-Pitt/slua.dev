@@ -45,6 +45,16 @@ function quaternion.slerp(a: quaternion, b: quaternion, t: number): quaternion
 function quaternion.tofwd(q: quaternion): vector
 function quaternion.toleft(q: quaternion): vector
 function quaternion.toup(q: quaternion): vector
+
+-- Related ll.* Quaternion Functions
+function ll.AngleBetween(a: quaternion, b: quaternion): number
+function ll.Axes2Rot(forward: vector, left: vector, up: vector): quaternion
+function ll.AxisAngle2Rot(axis: vector, angle: number): quaternion
+function ll.Euler2Rot(v: vector): quaternion
+function ll.Rot2Angle(q: quaternion): number
+function ll.Rot2Axis(q: quaternion): vector
+function ll.Rot2Euler(q: quaternion): vector
+function ll.RotBetween(a: vector, b: vector): quaternion
 ```
 
 :::note[Tip]
