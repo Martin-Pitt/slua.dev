@@ -6,17 +6,11 @@ sidebar:
     label: quaternion
 ---
 
-:::danger[Upcoming]
-The [new API for quaternions](https://github.com/secondlife/slua/blob/ffe7276dffe8580ceec35c6acbe5874fbcf31482/VM/src/llsl.cpp#L1541-L1585) which adds the `quaternion.*` methods is not released yet.
-
-Last checked: _Luau 2025-12-04.19944688578_
-:::
-
 ```slua
 -- Constants
 quaternion.identity: quaternion -- quaternion(0, 0, 0, 1)
 
--- Operators
+-- Arithmetic Operators
 quaternion * quaternion: quaternion -- rotate quaternion by another quaternion
 quaternion / quaternion: quaternion -- ...in the inverse direction
 vector * quaternion: vector -- rotate vector by quaternion
@@ -25,7 +19,7 @@ quaternion + quaternion: quaternion -- adds corresponding components
 quaternion - quaternion: quaternion -- subtracts corresponding components
 -quaternion: quaternion -- negates all components; Does not produce the inverse rotation!
 
--- Component Access
+-- Component Access (read-only)
 quaternion.x: number
 quaternion.y: number
 quaternion.z: number
@@ -57,20 +51,10 @@ function ll.Rot2Euler(q: quaternion): vector
 function ll.RotBetween(a: vector, b: vector): quaternion
 ```
 
-:::note[Tip]
-Unlike vector methods where you want to avoid using the colon syntax for performance reasons, quaternions dont have the fastcall optimisations, so feel free to use the colon syntax for better readability.
-
-Methods that start with a quaternion as an argument can be called using the colon syntax:
-```slua
-local quat = quaternion(0, 0, 0, 1)
-local normalized = quat:normalize()
-
--- example with chaining methods
-local rotatedVector = vector(1, 0, 0) / quat:normalize():slerp(quaternion.identity, 0.5)
-```
-:::
-
-
 ## Rotation Alias
 
 Quaternions are also aliased as `rotation` in SLua, which includes `torotation` as an alias for `toquaternion`. This is a nomenclature holdover from LSL.
+
+
+
+
