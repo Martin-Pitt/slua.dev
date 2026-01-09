@@ -203,11 +203,12 @@ export default function LLTable() {
 									functionName = functionName.replace(regex, '<mark>$1</mark>');
 								}
 								
+								let definition = lsl_definitions.functions[`ll${name}`];
+								
 								return (
 									<div class="ec-line">
 										<div class="code"><a href={`./${slug}`}><span style="--0:#F97583;--1:#BF3441">function</span><span style="--0:#E1E4E8;--1:#24292E"> </span><span style="--0:#B392F0;--1:#6F42C1">ll</span><span style="--0:#E1E4E8;--1:#24292E">.</span><span class="method" style="--0:#B392F0;--1:#6F42C1" dangerouslySetInnerHTML={{ __html: functionName }}/><span style="--0:#E1E4E8;--1:#24292E; margin-left: 0.2em">(</span>{
 										(() => {
-											let definition = lsl_definitions.functions[`ll${name}`];
 											let parameters = [];
 											for (const [index, arg] of (definition.arguments || []).entries())
 											{
@@ -221,7 +222,7 @@ export default function LLTable() {
 											
 											return parameters;
 										})()
-										}<span style="--0:#E1E4E8;--1:#24292E">): </span><span style="--0:#79B8FF;--1:#005CC5">number</span></a></div>
+										}<span style="--0:#E1E4E8;--1:#24292E">): </span><span style="--0:#79B8FF;--1:#005CC5">{convertType(definition.return)}</span></a></div>
 									</div>
 								)
 							})}
