@@ -6,6 +6,7 @@ import { readFile } from 'fs/promises';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import starWarp from '@inox-tools/star-warp';
 import starlightContextualMenu from 'starlight-contextual-menu';
+import { pluginLink } from 'expressive-code-links';
 
 
 
@@ -59,7 +60,7 @@ export default defineConfig({
         ],
         expressiveCode: {
             themes: ['github-dark', 'github-light'],
-            plugins: [pluginLineNumbers()],
+            plugins: [pluginLineNumbers(), pluginLink()],
             defaultProps: {
                 showLineNumbers: false,
             },
