@@ -7,7 +7,8 @@
     "start": "astro dev --port 4720",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "synthesize-slua-defs": "bun ./scripts/synthesize-slua-defs.js"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",
