@@ -25,8 +25,8 @@ const RemovedFunctions = {
 };
 
 // These functions exist through SLua's ll.* but really duplicate the functionality of some of the native libraries available from Luau
-// Native libraries may likely perform better (particularly those marked as 'fast functions', such as for math) or be more idiomatic to use
-// https://luau.org/performance#specialized-builtin-function-calls
+// Native functionality may likely perform better (particularly those marked as 'fastcall functions', such as in math) or be more idiomatic to use
+// This list is used to mark such functions in the documentation as duplicates, suggesting to use native instead (`.duplicates = DuplicateFunctions[name]`)
 const DuplicateFunctions = {
 	'Abs': 'math.abs',
 	'Fabs': 'math.fabs',
@@ -62,6 +62,9 @@ const DuplicateFunctions = {
 	'VecDist': 'vector.magnitude(v1 - v2)',
 };
 
+// Luau fastcall functions are optimized for performance
+// https://luau.org/performance#specialized-builtin-function-calls
+// This list is used to mark such functions (`.fastcall = true`)
 const Fastcalls = [
 	'assert',
 	
@@ -202,9 +205,6 @@ const Fastcalls = [
 	'math.isfinite'
 ];
 
-
-const lsl = load(await readFile(lslDefinitionsPath, 'utf8'));
-
 // When converting definitions translate keys to uuids, rotations to quaternions, integers to numbers, bool-semantics to boolean, etc.
 function convertType(type, value) {
 	// If a string but is actually UUID format, convert to uuid
@@ -222,6 +222,10 @@ function convertType(type, value) {
 	return type; // leave as-is
 }
 
+
+const lsl = load(await readFile(lslDefinitionsPath, 'utf8'));
+
+// Hardcoded SLua base definitions, merged/synthesized with LSL-based definitions
 const slua = {
 	types: {
 		nil: {
