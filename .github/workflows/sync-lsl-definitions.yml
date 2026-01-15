@@ -41,8 +41,8 @@ jobs:
         fi
         echo "LSL definitions file size: $(wc -c < src/data/lsl_definitions.yaml) bytes"
     
-    - name: Run update definitions script
-      run: bun run scripts/update-definitions.js
+    - name: Run convert definitions script
+      run: bun run scripts/convert-definitions.js
     
     - name: Check for changes
       id: verify-changed-files
