@@ -70,4 +70,8 @@
 			}
 		}
 	}
+	
+	.sl-markdown-content :target + .sl-anchor-link {
+		opacity: 1;
+	}
 }
