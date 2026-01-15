@@ -8,11 +8,11 @@ sidebar:
 
 {/* Note: sorted/grouped based on everyday usage and related functionality */}
 ```slua
--- Constants
+-- \[Constants](#constants)
 math.pi: number -- 3.14159265358979323846
 math.huge: number -- 2^1024
 
--- Basic Functions
+-- \[Basic Functions](#basic-functions)
 function math.abs(n: number): number
 function math.floor(n: number): number
 function math.ceil(n: number): number
@@ -22,19 +22,19 @@ function math.min(list: ...number): number
 function math.max(list: ...number): number
 function math.clamp(n: number, min: number, max: number): number
 
--- Angle Conversion and Interpolation
+-- \[Angle Conversion and Interpolation](#angle-conversion-and-interpolation)
 function math.deg(n: number): number
 function math.rad(n: number): number
 function math.lerp(a: number, b: number, t: number): number
 function math.map(x: number, inMin: number, inMax: number, outMin: number, outMax: number): number
 
--- Random Numbers and Perlin Noise
+-- \[Random Numbers and Perlin Noise](#random-numbers-and-perlin-noise)
 function math.random(): number
 function math.random(n: number): number
 function math.random(min: number, max: number): number
 function math.noise(x: number, y: number?, z: number?): number
 
--- Trigonometric Functions
+-- \[Trigonometric Functions](#trigonometric-functions)
 function math.sqrt(n: number): number
 function math.cos(n: number): number
 function math.sin(n: number): number
@@ -47,12 +47,12 @@ function math.asin(n: number): number
 function math.atan2(y: number, x: number): number
 function math.atan(n: number): number
 
--- Classification
+-- \[Classification](#classification)
 function math.isnan(n: number): boolean
 function math.isinf(n: number): boolean
 function math.isfinite(n: number): boolean
 
--- Advanced Functions
+-- \[Advanced Functions](#advanced-functions)
 function math.modf(n: number): (number, number)
 function math.fmod(x: number, y: number): number
 function math.frexp(n: number): (number, number)
@@ -66,6 +66,53 @@ function math.log(n: number, base: number?): number
 :::tip[Fastcall Mechanism]
 The math functions benefit from specialized builtin function calls from [Luau's fastcall mechanism](https://luau.org/performance#specialized-builtin-function-calls). However this mechanism does not work for indirect function calls.
 :::
+
+
+## Constants
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Basic Functions
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Angle Conversion and Interpolation
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Random Numbers and Perlin Noise
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Trigonometric Functions
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Classification
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Advanced Functions
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+
+
+
 
 ## Removed
 ```slua

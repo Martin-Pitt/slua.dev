@@ -8,11 +8,11 @@ sidebar:
 
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
--- Constants
+-- \[Constants](#constants)
 vector.zero: vector -- vector(0, 0, 0)
 vector.one: vector -- vector(1, 1, 1)
 
--- Operators
+-- \[Operators](#operators)
 vector + vector: vector
 vector - vector: vector
 vector * vector: number -- Multiplies each component pair, e.g. <a.x * b.x, a.y * b.y, a.z * b.z>
@@ -20,17 +20,17 @@ vector / number: vector -- Divides each component pair, e.g. <a.x / b.x, a.y / b
 vector * quaternion: vector -- rotate vector by quaternion
 vector / quaternion: vector -- rotate vector by inverse of quaternion
 
--- Component Access (read-only)
+-- \[Component Access](#component-access) (read-only)
 vector.x: number
 vector.y: number
 vector.z: number
 
--- Constructors and Conversion
+-- \[Constructors and Conversion](#constructors-and-conversion)
 function vector(x: number, y: number, z: number): vector
 function vector.create(x: number, y: number, z: number): vector
 function tovector(string: string): vector
 
--- Vector Operations
+-- \[Vector Operations](#vector-operations)
 function vector.magnitude(v: vector): number
 function vector.normalize(v: vector): vector
 function vector.cross(v1: vector, v2: vector): vector
@@ -38,13 +38,13 @@ function vector.dot(v1: vector, v2: vector): number
 function vector.angle(v1: vector, v2: vector, axis: vector?): number
 function vector.lerp(a: vector, b: vector, t: number): vector
 
--- Component-wise Operations
+-- \[Component-wise Operations](#component-wise-operations)
 function vector.abs(v: vector): vector
 function vector.floor(v: vector): vector
 function vector.ceil(v: vector): vector
 function vector.sign(v: vector): vector
 
--- Min/Max/Clamp
+-- \[Min/Max/Clamp](#minmaxclamp)
 function vector.min(...: vector): vector
 function vector.max(...: vector): vector
 function vector.clamp(v: vector, min: vector, max: vector): vector
@@ -63,3 +63,47 @@ The vector functions can benefit from optimisation via [Luau's fastcall mechanis
 
 Currently fastcall functions in `vector` include all except for `vector.angle`
 :::
+
+## Constants
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Operators
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Component Access
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Constructors and Conversion
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Vector Operations
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Component-wise Operations
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Min/Max/Clamp
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+

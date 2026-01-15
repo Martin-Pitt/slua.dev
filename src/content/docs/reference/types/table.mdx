@@ -7,7 +7,7 @@ sidebar:
 ---
 
 ```slua
--- Creation and Manipulation
+-- \[Creation and Manipulation](#creation-and-manipulation)
 function table.create(n: number, value: any?): {any}
 function table.insert(list: {any}, value: any)
 function table.insert(list: {any}, position: number, value: any)
@@ -15,16 +15,16 @@ function table.remove(list: {any}, position: number?): any?
 function table.move(source: {any}, sourceFrom: number, sourceTo: number, destPosition: number, destination: {any}?)
 function table.clear(table: {any})
 
--- Conversion
+-- \[Conversion](#conversion)
 function table.pack(...: any): { [number]: any, n: number }
 function table.unpack(list: {any}, from: number?, to: number?): ...any
 function table.concat(list: {string}, separator: string?, from: number?, to: number?): string
 
--- Query
+-- \[Query](#query)
 function table.find(table: {any}, value: any, start: number?): number?
 function table.sort(list: {any}, comparison: ((a: any, b: any) -> boolean)?)
 
--- Additional Utilities
+-- \[Additional Utilities](#additional-utilities)
 function table.maxn(list: {any}): number
 function table.freeze(table: table): table
 function table.isfrozen(table: table): boolean
@@ -41,7 +41,6 @@ local result = tbl:clone():shrink(true):freeze()
 ```
 :::
 
-
 ## Array-like Tables
 Tables can be used as arrays:
 ```slua
@@ -56,6 +55,12 @@ end
 ```
 
 
+## Creation and Manipulation
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
 ## Dictionary-like Tables
 Tables can be used as dictionaries/maps:
 ```slua
@@ -68,6 +73,24 @@ for key, value in example do
     print(key, value)
 end
 ```
+
+
+## Conversion
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Query
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Additional Utilities
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
 
 
 ## Deprecated

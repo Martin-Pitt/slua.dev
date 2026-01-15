@@ -7,6 +7,7 @@ sidebar:
 ---
 
 ```slua
+-- \[Methods](#methods)
 function LLEvents:on(eventName: string, callback: function): function
 function LLEvents:once(eventName: string, callback: function): function
 function LLEvents:off(eventName: string, callback: function): boolean
@@ -15,6 +16,7 @@ function LLEvents:listeners(eventName: string): {[string]: {function}}
 ```
 
 ```slua
+-- \[Event Handlers](#event-handlers)
 function LLEvents.touch_start(events: {DetectedEvent})
 function LLEvents.touch(events: {DetectedEvent})
 function LLEvents.touch_end(events: {DetectedEvent})
@@ -72,3 +74,16 @@ function LLEvents.path_update(type: number, reserved: table)
 function LLEvents.money(payer: uuid, amount: number)
 function LLEvents.transaction_result(request: uuid, success: number, message: string)
 ```
+
+
+## Methods
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Event Handlers
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+

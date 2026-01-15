@@ -7,11 +7,12 @@ sidebar:
 ---
  
 ```slua
+-- \[Properties](#properties)
 DetectedEvent.index: number
 DetectedEvent.valid: boolean
 DetectedEvent.canAdjustDamage: boolean
 
--- Info about the detected object
+-- \[Info about the detected object](#info-about-the-detected-object)
 function DetectedEvent.getKey(): uuid
 function DetectedEvent.getName(): string
 function DetectedEvent.getOwner(): uuid
@@ -19,15 +20,15 @@ function DetectedEvent.getGroup(): boolean
 function DetectedEvent.getType(): number
 function DetectedEvent.getRezzer(): uuid
 
--- Physical properties of the detected object
+-- \[Physical properties of the detected object](#physical-properties-of-the-detected-object)
 function DetectedEvent.getPos(): vector
 function DetectedEvent.getRot(): quaternion
 function DetectedEvent.getVel(): vector
 
--- Link the event is associated with
+-- \[Link the event is associated with](#link-the-event-is-associated-with)
 function DetectedEvent.getLinkNumber(): number
 
--- Touch specific properties
+-- \[Touch-specific properties](#touch-specific-properties)
 function DetectedEvent.getTouchFace(): vector
 function DetectedEvent.getTouchBinormal(): vector
 function DetectedEvent.getTouchNormal(): vector
@@ -35,10 +36,45 @@ function DetectedEvent.getTouchPos(): vector
 function DetectedEvent.getTouchST(): vector
 function DetectedEvent.getTouchUV(): vector
 
--- Grab specific properties
+-- \[Grab-specific properties](#grab-specific-properties)
 function DetectedEvent.getGrab(): vector
 
--- Damage specific
+-- \[Damage-specific](#damage-specific)
 function DetectedEvent.getDamage(): {number, number, number} -- {damage, type, original}
 function DetectedEvent.adjustDamage(newDamage: number)
 ```
+
+## Properties
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Info about the detected object
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Physical properties of the detected object
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Link the event is associated with
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Touch-specific properties
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Grab-specific properties
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Damage-specific
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::

@@ -13,7 +13,7 @@ import Attribution from '@components/Attribution.astro'
 _G: table
 _VERSION: string
 
--- Type Conversion
+-- \[Type Conversion](#type-conversion)
 function type(obj: any): string
 function typeof(obj: any): string
 function tonumber(s: string, base: number?): number?
@@ -23,32 +23,32 @@ function toquaternion(s: string): quaternion
 function torotation(s: string): quaternion
 function touuid(s: string): uuid
 
--- Error Handling and Debugging
+-- \[Error Handling and Debugging](#error-handling-and-debugging)
 function print(args: ...any)
 function assert<T>(value: T, message: string?): T
 function error(obj: any, level: number?)
 
--- Metatables
+-- \[Metatables](#metatables)
 function getmetatable(obj: any): table?
 function setmetatable(t: table, mt: table?)
 
--- Protected Calls
+-- \[Protected Calls](#protected-calls)
 function pcall(f: function, args: ...any): (boolean, ...any)
 function xpcall(f: function, e: function, args: ...any): (boolean, ...any)
 
--- Userdata Creation
+-- \[Userdata Creation](#userdata-creation)
 function newproxy(mt: boolean?): userdata
 
--- Module loading for bundlers
+-- \[Module loading for bundlers](#module-loading-for-bundlers)
 function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
 
--- Raw Access
+-- \[Raw Access](#raw-access)
 function rawget<K, V>(t: { [K]: V }, k: K): V?
 function rawset<K, V>(t: { [K] : V }, k: K, v: V)
 function rawlen<K, V>(t: { [K]: V } | string): number
 function rawequal(a: any, b: any): boolean
 
--- Iteration and Selection
+-- \[Iteration and Selection](#iteration-and-selection)
 function next<K, V>(t: { [K]: V }, i: K?): (K, V)?
 function select<T>(i: string, args: ...T): number
 function select<T>(i: number, args: ...T): ...T
@@ -89,8 +89,8 @@ The above functions have been removed and are not available in Second Life SLua.
 ## Full reference
 Most library functions are part of a library like `math` or `table`. However there are some that don't have any namespacing and are just global functions, which is what this page documents.
 
----
 
+### Type Conversion
 ```slua
 function type(obj: any): string
 ```
@@ -105,6 +105,7 @@ Returns the type of the object; for userdata objects that have a metatable with 
 
 ---
 
+
 ```slua
 function tonumber(s: string, base: number?): number?
 function tostring(obj: any): string
@@ -115,8 +116,9 @@ function touuid(s: string): uuid
 ```
 These functions allow you to convert between different types that SLua supports, typically from strings or into a string.
 
----
 
+
+### Error Handling and Debugging
 ```slua
 function print(args: ...any)
 ```
@@ -136,8 +138,8 @@ function error(obj: any, level: number?)
 ```
 `error` raises an error with the specified object. Note that errors don’t have to be strings, although they often are by convention; various error handling mechanisms like `pcall` preserve the error type. When `level` is specified, the error raised is turned into a string that contains call frame information for the caller at level `level`, where `1` refers to the function that called `error`. This can be useful to attribute the errors to callers, for example `error("Expected a valid object", 2)` highlights the caller of the function that called `error` instead of the function itself in the callstack.
 
----
 
+### Metatables
 ```slua
 function getmetatable(obj: any): table?
 function setmetatable(t: table, mt: table?)
@@ -146,8 +148,8 @@ function setmetatable(t: table, mt: table?)
 
 `setmetatable` changes metatable for the given table. Note that unlike `getmetatable`, this function only works on tables. If the table already has a protected metatable (has a `__metatable` field), this function errors.
 
----
 
+### Protected Calls
 ```slua
 function pcall(f: function, args: ...any): (boolean, ...any)
 function xpcall(f: function, e: function, args: ...any): (boolean, ...any)
@@ -156,15 +158,15 @@ function xpcall(f: function, e: function, args: ...any): (boolean, ...any)
 
 `xpcall` calls function `f` with parameters `args`. If the function succeeds, returns `true` followed by all return values of `f`. If the function raises an error, calls `e` with the error object as an argument, and returns `false` followed by the first return value of `e`. Note that `f` can yield, which results in the entire coroutine yielding as well. `e` can neither yield nor error - if it does raise an error, `xpcall` returns with `false` followed by a special error message.
 
----
 
+### Userdata Creation
 ```slua
 function newproxy(mt: boolean?): userdata
 ```
 Creates a new untyped userdata object; when `mt` is true, the new object has an empty metatable that can be modified using `getmetatable`.
 
----
 
+### Raw Access
 ```slua
 function rawget<K, V>(t: { [K]: V }, k: K): V?
 function rawset<K, V>(t: { [K] : V }, k: K, v: V)
@@ -179,8 +181,8 @@ function rawequal(a: any, b: any): boolean
 ```
 Returns `true` if `a` and `b` have the same type and point to the same object (for garbage collected types) or are equal (for value types).
 
----
 
+### Iteration and Selection
 ```slua
 function next<K, V>(t: { [K]: V }, i: K?): (K, V)?
 ```
@@ -215,8 +217,8 @@ function unpack<V>(a: {V}, f: number?, t: number?): ...V
 ```
 Returns all values of `a` with indices in `[f..t]` range. `f` defaults to 1 and `t` defaults to `#a`. Note that this is equivalent to `table.unpack`.
 
----
 
+### Module loading for bundlers
 ```slua
 function dangerouslyexecuterequiredmodule(f: (...any) -> ...any): ...any
 ```

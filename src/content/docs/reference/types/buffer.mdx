@@ -8,7 +8,7 @@ sidebar:
 
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
--- Buffer Creation and Management
+-- \[Buffer Creation and Management](#buffer-creation-and-management)
 function buffer.create(size: number): buffer
 function buffer.len(b: buffer): number
 function buffer.copy(target: buffer, targetOffset: number, source: buffer, sourceOffset: number?, count: number?): ()
@@ -16,11 +16,11 @@ function buffer.fill(b: buffer, offset: number, value: number, count: number?): 
 function buffer.fromstring(str: string): buffer
 function buffer.tostring(b: buffer): string
 
--- Bits Read/Write
+-- \[Bits Read/Write](#bits-readwrite)
 function buffer.readbits(b: buffer, bitOffset: number, bitCount: number): number
 function buffer.writebits(b: buffer, bitOffset: number, bitCount: number, value: number): ()
 
--- Numeric Read Operations
+-- \[Numeric Read Operations](#numeric-read-operations)
 function buffer.readi8(b: buffer, offset: number): number
 function buffer.readu8(b: buffer, offset: number): number
 function buffer.readi16(b: buffer, offset: number): number
@@ -30,7 +30,7 @@ function buffer.readu32(b: buffer, offset: number): number
 function buffer.readf32(b: buffer, offset: number): number
 function buffer.readf64(b: buffer, offset: number): number
 
--- Numeric Write Operations
+-- \[Numeric Write Operations](#numeric-write-operations)
 function buffer.writei8(b: buffer, offset: number, value: number): ()
 function buffer.writeu8(b: buffer, offset: number, value: number): ()
 function buffer.writei16(b: buffer, offset: number, value: number): ()
@@ -40,7 +40,32 @@ function buffer.writeu32(b: buffer, offset: number, value: number): ()
 function buffer.writef32(b: buffer, offset: number, value: number): ()
 function buffer.writef64(b: buffer, offset: number, value: number): ()
 
--- String Read/Write
+-- \[String Read/Write](#string-readwrite)
 function buffer.readstring(b: buffer, offset: number, count: number): string
 function buffer.writestring(b: buffer, offset: number, value: string, count: number?): ()
 ```
+
+## Buffer Creation and Management
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Bits Read/Write
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Numeric Read Operations
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Numeric Write Operations
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## String Read/Write
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::

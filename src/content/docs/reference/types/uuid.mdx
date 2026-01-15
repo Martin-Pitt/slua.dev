@@ -7,21 +7,41 @@ sidebar:
 ---
 
 ```slua
+-- Related constants
 NULL_KEY: uuid -- uuid with all bytes set to zero
 
--- Access
+-- \[Fields](#fields)
 uuid.istruthy: boolean
 uuid.bytes: string
 
--- Constructors and Conversion
+-- \[Constructors and Conversion](#constructors-and-conversion)
 function uuid(key: string | buffer | uuid): uuid
 function uuid.create(key: string | buffer | uuid): uuid
 function touuid(key: string | buffer | uuid): uuid
 
--- Related ll.* UUID Functions
+-- \[Related ll.* UUID Functions](#related-ll-uuid-functions)
 function ll.GenerateKey(): uuid
 function ll.GetKey(): uuid
 function ll.GetObjectLinkKey(object: uuid, link: number): uuid
 function ll.GetOwner(): uuid
 function ll.GetOwnerKey(object: uuid): uuid
 ```
+
+## Fields
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Constructors and Conversion
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Related ll.* UUID Functions
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
