@@ -1,10 +1,3 @@
-import { group } from 'console';
-import { readFile, writeFile, mkdir, access, unlink } from 'fs/promises';
-import { load, dump } from 'js-yaml';
-
-const lslDefinitionsPath = 'src/data/lsl_definitions.yaml';
-const sluaDefinitionsPath = 'src/data/slua_definitions.yaml';
-
 /*
 	This script uses LSL definitions to synthesize SLua-specific definitions based on what we know:
 	- The LSL definitions had been used to generate SLua code
@@ -15,6 +8,12 @@ const sluaDefinitionsPath = 'src/data/slua_definitions.yaml';
 	- Some ll* functions are removed from SLua's `ll` library (see RemovedFunctions)
 	- Some ll* functions are duplicates of native Luau libraries (see DuplicateFunctions)
 */
+
+import { readFile, writeFile, mkdir, access, unlink } from 'fs/promises';
+import { load, dump } from 'js-yaml';
+
+const lslDefinitionsPath = 'src/data/lsl_definitions.yaml';
+const sluaDefinitionsPath = 'src/data/slua_definitions.yaml';
 
 // These functions were removed from SLua's ll.* for these reasons
 const RemovedFunctions = {
@@ -541,6 +540,18 @@ const slua = {
 				]},
 			],
 		},
+		thread: {
+			tooltip: 'A thread represents a separate execution context for running coroutines.',
+			constructors: [
+				{ name: 'coroutine.create', type: 'function coroutine.create(func: (...: any) -> ...any): thread', tooltip: 'Creates a new thread (coroutine) with the given function as its body.' },
+			],
+			methods: [
+				{ name: 'resume', type: 'function coroutine.resume(co: thread, ...: any): (boolean, ...any)', tooltip: 'Resumes the execution of the coroutine co, passing any additional arguments to it. Returns true followed by any values yielded or returned by the coroutine, or false followed by an error message if an error occurred.' },
+				{ name: 'yield', type: 'function coroutine.yield(...: any): ...any', tooltip: 'Suspends the execution of the current coroutine, returning any provided values to the caller of resume.' },
+				{ name: 'status', type: 'function coroutine.status(co: thread): string', tooltip: 'Returns the status of the coroutine co. Possible values are "running", "suspended", "normal", and "dead".' },
+				{ name: 'wrap', type: 'function coroutine.wrap(func: (...: any) -> ...any): (...: any) -> ...any', tooltip: 'Creates a new coroutine with the given function and returns a function that, when called, resumes the coroutine.' },
+			],
+		},
 		buffer: {
 			tooltip: 'A buffer is a contiguous block of memory used to store binary data.',
 			constructors: [
@@ -826,28 +837,25 @@ const slua = {
 				if(func.sleep === 0) delete func.sleep;
 				if(func.return === 'void') delete func.return;
 				
-				return [
+				return {
 					name,
-					{
-						...func,
-						arguments: func.arguments.map(arg => {
-							const [argumentName, argumentDefinition] = Object.entries(arg).pop();
-							return {
-								[argumentName]: {
-									...argumentDefinition,
-									type: convertType(argumentDefinition.type),
-								}
-							};
-						}),
-						return: convertType(func.return)
-					}
-				];
-			})
-			.filter(Boolean)
-			.reduce((obj, [name, func]) => {
-				obj[name] = func;
-				return obj;
-			}, {}),
+					...func,
+					arguments: func.arguments.map(arg => {
+						const [argumentName, argumentDefinition] = Object.entries(arg).pop();
+						return {
+							[argumentName]: {
+								...argumentDefinition,
+								type: convertType(argumentDefinition.type),
+							}
+						};
+					}),
+					return: convertType(func.return),
+					type: `function ll.${name}(${func.arguments.map(arg => {
+						const [argumentName, argumentDefinition] = Object.entries(arg).pop();
+						return `${argumentName}: ${convertType(argumentDefinition.type)}`;
+					}).join(', ')}): ${convertType(func.return)}`,
+				};
+			}).filter(Boolean),
 		},
 		LLEvents: {
 			functions: [
@@ -901,28 +909,25 @@ const slua = {
 				if(func.sleep === 0) delete func.sleep;
 				if(func.return === 'void') delete func.return;
 				
-				return [
+				return {
 					name,
-					{
-						...func,
-						arguments: func.arguments.map(arg => {
-							const [argumentName, argumentDefinition] = Object.entries(arg).pop();
-							return {
-								[argumentName]: {
-									...argumentDefinition,
-									type: convertType(argumentDefinition.type),
-								}
-							};
-						}),
-						return: convertType(func.return)
-					}
-				];
-			})
-			.filter(Boolean)
-			.reduce((obj, [name, func]) => {
-				obj[name] = func;
-				return obj;
-			}, {}),
+					...func,
+					arguments: func.arguments.map(arg => {
+						const [argumentName, argumentDefinition] = Object.entries(arg).pop();
+						return {
+							[argumentName]: {
+								...argumentDefinition,
+								type: convertType(argumentDefinition.type),
+							}
+						};
+					}),
+					return: convertType(func.return),
+					type: `function ll.${name}(${func.arguments.map(arg => {
+						const [argumentName, argumentDefinition] = Object.entries(arg).pop();
+						return `${argumentName}: ${convertType(argumentDefinition.type)}`;
+					}).join(', ')})${func.return ? `: ${convertType(func.return)}` : ''}`,
+				};
+			}).filter(Boolean),
 		},
 	},
 	constants: Object.fromEntries(
