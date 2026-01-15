@@ -1,6 +1,10 @@
 ---
 title: Recipes
 description: Recipes for SLua
+sidebar:
+  badge:
+    text: Stub
+    variant: danger
 ---
 
 :::caution[Stub]

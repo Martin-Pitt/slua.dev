@@ -60,4 +60,14 @@
 	.main-pane {
 		container: article / inline-size;
 	}
+	
+	#starlight__sidebar .sidebar-content {
+		li > a:not(:hover):not([aria-current="page"]):has(.sl-badge.danger) {
+			opacity: 0.6;
+			
+			.sl-badge {
+				visibility: hidden;
+			}
+		}
+	}
 }

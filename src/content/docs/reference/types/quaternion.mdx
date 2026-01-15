@@ -7,10 +7,10 @@ sidebar:
 ---
 
 ```slua
--- Constants
+-- \[Constants](#constants)
 quaternion.identity: quaternion -- quaternion(0, 0, 0, 1)
 
--- Arithmetic Operators
+-- \[Arithmetic Operators](#arithmetic-operators)
 quaternion * quaternion: quaternion -- rotate quaternion by another quaternion
 quaternion / quaternion: quaternion -- ...in the inverse direction
 vector * quaternion: vector -- rotate vector by quaternion
@@ -19,18 +19,18 @@ quaternion + quaternion: quaternion -- adds corresponding components
 quaternion - quaternion: quaternion -- subtracts corresponding components
 -quaternion: quaternion -- negates all components; Does not produce the inverse rotation!
 
--- Component Access (read-only)
+-- \[Component Access (read-only)](#component-access)
 quaternion.x: number
 quaternion.y: number
 quaternion.z: number
 quaternion.s: number
 
--- Constructors and Conversion
+-- \[Constructors and Conversion](#constructors-and-conversion)
 function quaternion(x: number, y: number, z: number, s: number): quaternion
 function quaternion.create(x: number, y: number, z: number, s: number): quaternion
 function toquaternion(string: string): quaternion
 
--- Methods
+-- \[Methods](#methods)
 function quaternion.normalize(q: quaternion): quaternion
 function quaternion.magnitude(q: quaternion): number
 function quaternion.conjugate(q: quaternion): quaternion
@@ -40,7 +40,7 @@ function quaternion.tofwd(q: quaternion): vector
 function quaternion.toleft(q: quaternion): vector
 function quaternion.toup(q: quaternion): vector
 
--- Related ll.* Quaternion Functions
+-- \[Related ll.* Quaternion Functions](#related-ll-quaternion-functions)
 function ll.\[AngleBetween](/reference/library/ll/anglebetween)(a: quaternion, b: quaternion): number
 function ll.\[Axes2Rot](/reference/library/ll/axes2rot)(forward: vector, left: vector, up: vector): quaternion
 function ll.\[AxisAngle2Rot](/reference/library/ll/axisangle2rot)(axis: vector, angle: number): quaternion
@@ -50,6 +50,38 @@ function ll.\[Rot2Axis](/reference/library/ll/rot2axis)(q: quaternion): vector
 function ll.\[Rot2Euler](/reference/library/ll/rot2euler)(q: quaternion): vector
 function ll.\[RotBetween](/reference/library/ll/rotbetween)(a: vector, b: vector): quaternion
 ```
+
+
+## Constants
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Arithmetic Operators
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Component Access
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Constructors and Conversion
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Methods
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Related ll.* Quaternion Functions
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
 
 ## Rotation Alias
 

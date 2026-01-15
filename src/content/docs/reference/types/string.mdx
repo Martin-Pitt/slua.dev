@@ -10,21 +10,21 @@ import Attribution from '@components/Attribution.astro'
 
 {/* Note: sorted and grouped based on related functionality */}
 ```slua
--- Operators
+-- \[Operators](#operators)
 #string: number -- string length
-string .. string: string
+string .. string: string -- \[Concatenation](#concatenation)
 string ..= string
 
--- Comparison Operators (Lexicographical order based on each ASCII byte, e.g. 'A' < 'a', '420' < '69', etc.)
+-- \[Comparison Operators](#comparison-operators) (Lexicographical order based on each ASCII byte, e.g. 'A' < 'a', '420' < '69', etc.)
 string < string: boolean
 string <= string: boolean
 string > string: boolean
 string >= string: boolean
 
--- Conversion
+-- \[Conversion](#conversion)
 function tostring(obj: any): string
 
--- Methods
+-- \[Methods](#methods)
 function string.sub(s: string, f: number, t: number?): string
 function string.lower(s: string): string
 function string.upper(s: string): string
@@ -32,27 +32,27 @@ function string.rep(s: string, n: number): string
 function string.reverse(s: string): string
 function string.len(s: string): number -- equivalent to #s
 
--- Splitting
+-- \[Splitting](#splitting)
 function string.split(s: string, separator: string?): {string}
 
--- Formatting
+-- \[Formatting](#formatting)
 function string.format(format: string, ...: any): string
 
--- Pattern Matching
+-- \[Pattern Matching](#pattern-matching)
 function string.find(s: string, pattern: string, init: number?, plain: boolean?): (number?, number?, ...string)
 function string.match(s: string, pattern: string, init: number?): ...string?
 function string.gsub(s: string, pattern: string, replacement: string | table | (...string) -> string, max: number?): (string, number)
 function string.gmatch(s: string, pattern: string): <iterator>
 
--- Byte and Character Operations
+-- \[Byte and Character Operations](#byte-and-character-operations)
 function string.byte(s: string, f: number?, t: number?): ...number
 function string.char(...: number): string
 
--- Packing and Unpacking
+-- \[Packing and Unpacking](#packing-and-unpacking)
 function string.pack(format: string, ...: any): string
 function string.unpack(format: string, s: string, pos: number?): ...any
 
--- Related ll.* String Functions (UTF8 friendly)
+-- \[Related ll.* String Functions](#related-ll-string-functions) (UTF8 friendly)
 function ll.DeleteSubString(source: string, start: number, end: number): string
 function ll.GetSubString(string: string, start: number, end: number): string
 function ll.InsertString(target: string, position: number, source: string): string
@@ -121,6 +121,18 @@ local nested = [=[This is a [[nested]] multiline string.]=]
 ```
 
 
+## Operators
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+## Comparison Operators
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
 ## Concatenation
 
 You can concatenate strings using the `..` operator:
@@ -141,6 +153,33 @@ If you are using single or double quotes to define a string and want to embed th
 local quote = "Foo said, \"Hello!\""
 ```
 
+## Conversion
+
+You can convert other types to string using `tostring`:
+```slua
+local num = 42
+local str = tostring(num)  -- "42"
+```
+
+## Methods
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Splitting
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Formatting
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+## Related ll.* String Functions
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
 
 ## Pattern Matching
 
@@ -368,6 +407,16 @@ end
 	--> Value: 30, Unit: px
 ```
 
+# Byte and Character Operations
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+# Packing and Unpacking
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
 
 <Attribution
 	title="Lua 5.3 Reference Manual"
@@ -375,3 +424,4 @@ end
 	author="2015–2020 Lua.org, PUC-Rio"
 	license="MIT"
 />
+

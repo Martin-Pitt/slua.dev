@@ -1,6 +1,10 @@
 ---
 title: Guides
 description: Guides for SLua
+sidebar:
+  badge:
+    text: Stub
+    variant: danger
 ---
 
 :::caution[Stub]
