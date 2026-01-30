@@ -53,6 +53,7 @@ const DuplicateFunctions = {
 	'Char': 'string.char, utf8.char',
 	'Ord': 'string.byte, utf8.codepoint',
 	'SubStringIndex': 'string.find',
+	'ReplaceSubString': 'string.gsub',
 	'ParseString2List': 'string.split',
 	'ParseStringKeepNulls': 'string.split',
 	'CSV2List': 'string.split',
