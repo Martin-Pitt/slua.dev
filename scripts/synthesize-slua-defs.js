@@ -52,7 +52,11 @@ const DuplicateFunctions = {
 	'Frand': 'math.random',
 	'Char': 'string.char, utf8.char',
 	'Ord': 'string.byte, utf8.codepoint',
+	// 'SubStringIndex': 'string.find', // nope; UTF-8 differences
+	'ReplaceSubString': 'string.gsub',
+	'ParseStringKeepNulls': 'string.split',
 	'CSV2List': 'string.split',
+	// 'GetSubString': 'string.sub', // nope; UTF-8 differences
 	'GetTime': 'os.clock',
 	'GetUnixTime': 'os.time',
 	'GetTimestamp': 'os.date',
