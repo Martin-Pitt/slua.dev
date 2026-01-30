@@ -55,6 +55,7 @@ const DuplicateFunctions = {
 	'ParseString2List': 'string.split',
 	'ParseStringKeepNulls': 'string.split',
 	'CSV2List': 'string.split',
+	'GetSubString': 'string.sub',
 	'GetTime': 'os.clock',
 	'GetUnixTime': 'os.time',
 	'GetTimestamp': 'os.date',
