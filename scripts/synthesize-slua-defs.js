@@ -32,7 +32,7 @@ const DuplicateFunctions = {
 	'Json2List', 'lljson.decode',
 	'List2Json', 'lljson.encode',
 	'Abs': 'math.abs',
-	'Fabs': 'math.fabs',
+	'Fabs': 'math.abs',
 	'Ceil': 'math.ceil',
 	'Round': 'math.round',
 	'Floor': 'math.floor',
