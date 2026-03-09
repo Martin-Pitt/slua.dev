@@ -48,6 +48,9 @@ function vector.sign(v: vector): vector
 function vector.min(...: vector): vector
 function vector.max(...: vector): vector
 function vector.clamp(v: vector, min: vector, max: vector): vector
+
+-- Related ll.* Vector Functions
+function ll.\[Rot2Axis](/reference/library/ll/rot2axis)(Rotation: quaternion): vector
 ```
 
 :::danger[Upcoming]
@@ -63,6 +66,7 @@ The vector functions can benefit from optimisation via [Luau's fastcall mechanis
 
 Currently fastcall functions in `vector` include all except for `vector.angle`
 :::
+
 
 ## Constants
 :::caution[Stub]
@@ -104,6 +108,5 @@ This section is a stub and is currently under development.
 :::caution[Stub]
 This section is a stub and is currently under development.
 :::
-
 
 
