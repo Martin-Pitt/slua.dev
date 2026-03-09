@@ -14,6 +14,8 @@ function table.insert(list: {any}, position: number, value: any)
 function table.remove(list: {any}, position: number?): any?
 function table.move(source: {any}, sourceFrom: number, sourceTo: number, destPosition: number, destination: {any}?)
 function table.clear(table: {any})
+function table.append(table: table, ...any): table
+function table.extend(table: destination, table: source): table
 
 -- \[Conversion](#conversion)
 function table.pack(...: any): { [number]: any, n: number }
