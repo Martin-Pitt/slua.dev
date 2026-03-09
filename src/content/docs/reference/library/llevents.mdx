@@ -12,7 +12,7 @@ function LLEvents:on(eventName: string, callback: function): function
 function LLEvents:once(eventName: string, callback: function): function
 function LLEvents:off(eventName: string, callback: function): boolean
 function LLEvents:eventNames(): {string}
-function LLEvents:listeners(eventName: string): {[string]: {function}}
+function LLEvents:handlers(eventName: string): {[string]: {function}}
 ```
 
 ```slua
