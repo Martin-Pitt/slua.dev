@@ -28,6 +28,10 @@ function bit32.rrotate(n: number, displacement: number): number
 function bit32.lshift(n: number, displacement: number): number
 function bit32.rshift(n: number, displacement: number): number
 function bit32.arshift(n: number, displacement: number): number
+
+-- \[Signed 32-bit Integer Operations](#signed-32-bit-integer-operations)
+function bit32.s32(n: number): number
+function bit32.smul(a: number, b: number): number
 ```
 
 
@@ -48,3 +52,9 @@ This section is a stub and is currently under development.
 This section is a stub and is currently under development.
 :::
 
+## Signed 32-bit Integer Operations
+`bit32.s32` is used for normalizing numbers to the signed 32-bit range. Whereas `bit32.smul` performs signed 32-bit multiplication, without inccuring float64 precision loss.
+
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
