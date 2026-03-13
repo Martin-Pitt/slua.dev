@@ -43,7 +43,6 @@ const DuplicateFunctions = {
 	'Tan': 'math.tan',
 	'Asin': 'math.asin',
 	'Acos': 'math.acos',
-	'Atan': 'math.atan',
 	'Atan2': 'math.atan2',
 	'Pow': 'math.pow',
 	'Exp': 'math.exp',
