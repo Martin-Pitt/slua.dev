@@ -46,7 +46,6 @@ const DuplicateFunctions = {
 	'Atan': 'math.atan',
 	'Atan2': 'math.atan2',
 	'Pow': 'math.pow',
-	'Exp': 'math.exp',
 	'Log': 'math.log',
 	'Log10': 'math.log10',
 	'Frand': 'math.random',
