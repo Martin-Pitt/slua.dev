@@ -27,10 +27,11 @@ const RemovedFunctions = {
 // Native functionality may likely perform better (particularly those marked as 'fastcall functions', such as in math) or be more idiomatic to use
 // This list is used to mark such functions in the documentation as duplicates, suggesting to use native instead (`.duplicates = DuplicateFunctions[name]`)
 const DuplicateFunctions = {
-	'Base642String', 'llbase64.decode',
-	'String2Base64', 'llbase64.encode',
-	'Json2List', 'lljson.decode',
-	'List2Json', 'lljson.encode',
+	'OwnerSay': 'print',
+	'Base642String': 'llbase64.decode',
+	'String2Base64': 'llbase64.encode',
+	'Json2List': 'lljson.decode',
+	'List2Json': 'lljson.encode',
 	'Abs': 'math.abs',
 	'Fabs': 'math.abs',
 	'Ceil': 'math.ceil',
