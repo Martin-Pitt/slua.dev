@@ -154,9 +154,11 @@ const Fastcalls = [
 	// table.
 	'table.insert',
 	'table.unpack',
+	'unpack',
 	
 	// vector ctor
 	'vector',
+	'vector.create',
 	
 	// bit32.count
 	'bit32.countlz',
@@ -185,12 +187,15 @@ const Fastcalls = [
 	// buffer.
 	'buffer.readi8',
 	'buffer.readu8',
+	'buffer.writei8',
 	'buffer.writeu8',
 	'buffer.readi16',
 	'buffer.readu16',
 	'buffer.writeu16',
+	'buffer.writei16',
 	'buffer.readi32',
 	'buffer.readu32',
+	'buffer.writei32',
 	'buffer.writeu32',
 	'buffer.readf32',
 	'buffer.writef32',
