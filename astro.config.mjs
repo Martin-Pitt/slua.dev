@@ -67,8 +67,8 @@ export default defineConfig({
             shiki: {
                 bundledLangs: [],
                 langs: [
-                    JSON.parse(await readFile('./src/data/slua_grammar.json', 'utf-8')),
-                    JSON.parse(await readFile('./src/data/lsl_grammar.json', 'utf-8')),
+                    JSON.parse(await readFile('./src/data/slua.tmLanguage.json', 'utf-8')),
+                    JSON.parse(await readFile('./src/data/lsl.tmLanguage.json', 'utf-8')),
                 ],
             },
         },
