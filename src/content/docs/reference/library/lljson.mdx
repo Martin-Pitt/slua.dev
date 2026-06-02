@@ -7,12 +7,22 @@ sidebar:
 ---
 
 ```slua
+lljson.null: any -- Constant to pass for null to json encode
+lljson.remove: any -- Return from a reviver/replacer to omit this item
+lljson.array_mt = { __jsonhint: "array" } -- Metatable for declaring the table as an array when passed through json encode
+lljson.object_mt = { __jsonhint: "object" } -- Metatable for declaring the table as an object when passed through json encode
+lljson.empty_array = setmetatable({}, lljson.array_mt) -- Constant to pass for an empty array to json encode
+lljson.empty_object = setmetatable({}, lljson.object_mt) -- Constant to pass for an empty object to json encode
+
 -- \[Methods](#methods)
 function lljson.encode(data: any): string
 function lljson.decode(json: string): any
-
 function lljson.slencode(data: any, tightEncoding: boolean?): string
 function lljson.sldecode(json: string): any
+
+-- \[Metamethods](#metamethods)
+__tojson: function -- Called by encode and slencode, return value you want to use in place of table during encoding
+__jsonhint: "array" | "object" -- Used during encoding to determine whether to treat table as array or object in case it is ambiguous
 ```
 
 
@@ -20,4 +30,12 @@ function lljson.sldecode(json: string): any
 :::caution[Stub]
 This section is a stub and is currently under development.
 :::
+
+## Metamethods
+:::caution[Stub]
+This section is a stub and is currently under development.
+:::
+
+
+
 
