@@ -1,13 +1,97 @@
 ---
 title: Physics
-description: Working with Physics in Second Life scripting
+description: Working with physics, collisions, and physical materials in Second Life scripting
 sidebar:
   badge:
-    text: Stub
-    variant: danger
+    text: Draft
+    variant: caution
 ---
 
-:::caution[Stub]
-This documentation page is a stub and is currently under development.
+Physics in SLua covers how prims and avatars interact with the simulator: whether an object is affected by gravity, how it collides with the world, and how you react when something bumps into it.
+
+This page focuses on **simulator physics** (forces, collisions, materials). For changing position and velocity directly, see [Movement](./movement.mdx). For editing prim shape and link properties, see [Prims](./prims.mdx).
+
+## Enabling physics on a prim
+
+Use [`ll.SetStatus`](../../reference/library/ll.mdx) with the `STATUS_PHYSICS` flag to toggle whether the linkset is simulated:
+
+```slua
+-- Turn physics on for this object
+ll.SetStatus(STATUS_PHYSICS, true)
+
+-- Phantom objects pass through others but can still detect collisions
+ll.SetStatus(STATUS_PHANTOM, true)
+```
+
+`STATUS_PHYSICS` and `STATUS_PHANTOM` are documented in the [Constants](../../reference/constants.mdx) reference alongside other status flags.
+
+## Physics shape and materials
+
+[`ll.SetLinkPrimitiveParamsFast`](../../reference/library/ll.mdx) accepts `PRIM_PHYSICS` to enable or disable physics on individual prims in a linkset, and `PRIM_PHYSICS_SHAPE_TYPE` to choose how the simulator builds the collision hull:
+
+| Constant | Purpose |
+| -------- | ------- |
+| `PRIM_PHYSICS_SHAPE_PRIM` | Use the prim's mesh as the collider (default for most builds) |
+| `PRIM_PHYSICS_SHAPE_CONVEX` | Convex hull — cheaper and more stable for complex meshes |
+| `PRIM_PHYSICS_SHAPE_NONE` | No physics shape (useful for decorative prims in a physical linkset) |
+
+Friction, bounce, and gravity for a prim are set with `PRIM_MATERIAL` and related params. Material presets (`PRIM_MATERIAL_STONE`, `PRIM_MATERIAL_METAL`, `PRIM_MATERIAL_GLASS`, etc.) change how the object slides and rebounds when it collides.
+
+:::tip[Performance]
+Convex physics shapes (`PRIM_PHYSICS_SHAPE_CONVEX`) are usually the better choice for sculpted or mesh-heavy objects. They reduce simulator load compared to triangle-accurate hulls.
 :::
 
+## Collisions and contact events
+
+Scripts learn about physical contact through collision events and helper functions:
+
+- [`ll.CollisionFilter`](../../reference/library/ll.mdx) — limit which agents or objects can trigger collisions
+- [`ll.CollisionSound`](../../reference/library/ll.mdx) / [`ll.CollisionSprite`](../../reference/library/ll.mdx) — optional feedback when the object is struck
+
+Typical pattern:
+
+```slua
+default {
+    collision_start(integer num_detected) {
+        local i = 0
+        while i < num_detected {
+            local agent = ll.DetectedKey(i)
+            -- react to contact (damage, bounce, score, etc.)
+            i += 1
+        }
+    }
+
+    collision_end(integer num_detected) {
+        -- cleanup when contact ends
+    }
+}
+```
+
+Use `STATUS_PHANTOM` when you need **collision events without physical pushback** (triggers, sensors, pickup volumes).
+
+## Forces, impulses, and motion
+
+Physical motion can come from the simulator (gravity, collisions) or from script:
+
+- [`ll.ApplyImpulse`](../../reference/library/ll.mdx) — instant velocity change at a point
+- [`ll.ApplyRotationalImpulse`](../../reference/library/ll.mdx) — spin the object
+- [`ll.SetForce`](../../reference/library/ll.mdx) — continuous force until the next frame
+
+Vectors passed to these functions use the [vector](../../reference/types/vector.mdx) type. Rotations often pair with [quaternion](../../reference/types/quaternion.mdx) helpers from the [math library](../../reference/library/math.mdx).
+
+For non-physical movement (keyframes, smooth sliding, vehicles), prefer the APIs covered in [Movement](./movement.mdx) — mixing physical and non-physical motion on the same prim causes fighting between script and simulator.
+
+## Vehicles and specialized physics
+
+The legacy vehicle API (`ll.Vehicle*` functions in [`ll`](../../reference/library/ll.mdx)) builds on top of simulator physics for cars, boats, and aircraft. Vehicle scripts set parameters such as linear and angular friction, buoyancy, and banking. Treat vehicles as a specialized layer over the same `STATUS_PHYSICS` foundation described above.
+
+## Related topics
+
+- [Movement](./movement.mdx) — scripted motion without relying on the physics engine
+- [Math](./math.mdx) — vectors, rotations, and interpolation used in force calculations
+- [Pathfinding](./pathfinding.mdx) — character motion with physics constraints
+- [Performance guide](../guides/performance.md) — keep physical object count and collision complexity reasonable
+
+:::caution[Guides and recipes]
+Dedicated physics guides and recipes are not published yet. Contributions welcome on the [slua.dev repository](https://github.com/Martin-Pitt/slua.dev).
+:::
